@@ -19,7 +19,33 @@
             var ctx = canvas.getContext('2d');
             let screenWidth = 1000;
             let screenHeight = 500;
+            class gChar {
+                constructor(x, y, width, height, color){
+                    this.x = x;
+                    this.y = y;
+                    this.width = width;
+                    this.height = height;
+                    this.color = color;
+                }
+            }
+            var rectangle = new gChar(
+                50, 50, 50, 50, "rgb(0,0,255)"
+            )
+            var draw = function(){
+                ctx.clearRect(0, 0, screenWidth, screenHeight);
+                ctx.fillStyle = rectangle.color;
+                ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+                ctx.fillStyle = rectangle.color;
+                ctx.fillRect(rectangle.x + 200, rectangle.y, rectangle.width, rectangle.height);
+                ctx.fillStyle = rectangle.color;
+                ctx.fillRect(rectangle.x + 400, rectangle.y, rectangle.width, rectangle.height);
+                ctx.fillStyle = rectangle.color;
+                ctx.fillRect(rectangle.x + 600, rectangle.y, rectangle.width, rectangle.height);
+                ctx.fillStyle = rectangle.color;
+                ctx.fillRect(rectangle.x + 800, rectangle.y, rectangle.width, rectangle.height);
+            }
             var step = function(){
+                draw();
                 window.requestAnimationFrame(step);
             }
             step();
