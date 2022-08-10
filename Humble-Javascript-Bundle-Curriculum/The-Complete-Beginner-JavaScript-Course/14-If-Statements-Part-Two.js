@@ -3,9 +3,9 @@ var xPos = 0;
 let endPos = 5;
 
 
-if  (keyPressed == "r" && xPos < endPos) {
-        xPos += 1;
-}
+// if  (keyPressed == "r" && xPos < endPos) {
+//         xPos += 1;
+// }
 
 if (keyPressed == "r"){
    if(xPos < endPos){
