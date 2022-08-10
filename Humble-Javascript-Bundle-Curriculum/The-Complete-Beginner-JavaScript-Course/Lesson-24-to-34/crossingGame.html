@@ -15,40 +15,60 @@
 
         </canvas>
         <script type="text/javascript">
+            
             var canvas = document.getElementById('myCanvas');
             var ctx = canvas.getContext('2d');
             let screenWidth = 1000;
             let screenHeight = 500;
+            let width = 50;
+
             class gChar {
-                constructor(x, y, width, height, color){
+                constructor(x, y, width, height, color, speed){
                     this.x = x;
                     this.y = y;
                     this.width = width;
                     this.height = height;
                     this.color = color;
+                    this.speed = speed;
+                }
+                moveY(yAmount){
+                    if (this.y >  screenHeight - 100){
+                        this.speed = -this.speed;
+                    } 
+                    
+                }
+                moveX(xAmount){
+                    this.x += this.speed;
                 }
             }
-            var rectangle = new gChar(
-                50, 50, 50, 50, "rgb(0,0,255)"
-            )
+
+            var enemies = [
+                new gChar(200, 50, width, width, "rgb(0,0,255)", 2),
+                new gChar(450, screenHeight-100, width, width, "rgb(0,0,255)", 2),
+                new gChar(700, 50, width, width, "rgb(0,0,255)", 2)
+            ]
+
             var draw = function(){
                 ctx.clearRect(0, 0, screenWidth, screenHeight);
-                ctx.fillStyle = rectangle.color;
-                ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-                ctx.fillStyle = rectangle.color;
-                ctx.fillRect(rectangle.x + 200, rectangle.y, rectangle.width, rectangle.height);
-                ctx.fillStyle = rectangle.color;
-                ctx.fillRect(rectangle.x + 400, rectangle.y, rectangle.width, rectangle.height);
-                ctx.fillStyle = rectangle.color;
-                ctx.fillRect(rectangle.x + 600, rectangle.y, rectangle.width, rectangle.height);
-                ctx.fillStyle = rectangle.color;
-                ctx.fillRect(rectangle.x + 800, rectangle.y, rectangle.width, rectangle.height);
+                enemies.forEach(function(element){
+                    ctx.fillStyle = element.color;
+                    ctx.fillRect(element.x, element.y, element.width, element.height);
+                });
+
             }
+
+            var update = function(){
+                enemies[0].moveY();
+            }
+
             var step = function(){
+                update();
                 draw();
                 window.requestAnimationFrame(step);
             }
+
             step();
+
         </script>
     </body>
 </html>
