@@ -1,6 +1,7 @@
 var keyPressed = "l";
 var xPos = 0;
 let endPos = 5;
+let startPos = 0;
 
 
 // if  (keyPressed == "r" && xPos < endPos) {
@@ -12,7 +13,9 @@ if (keyPressed == "r"){
     xPos += 1;
    }
 } else if  (keyPressed == "l") {
-    xPos -= 1;
+    if(xPos > startPos){
+        xPos -= 1;
+    }
 } else {
     xPos = 0;
 }
