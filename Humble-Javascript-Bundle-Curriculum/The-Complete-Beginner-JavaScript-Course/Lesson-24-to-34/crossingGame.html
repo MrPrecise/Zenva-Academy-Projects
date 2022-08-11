@@ -45,7 +45,7 @@
                 }
             }
 
-            var player = new gChar(50, 225, width, width, "rgb(0,255,0)", 0)
+            var player = new gChar(50, 200, width, width, "rgb(0,255,0)", 0)
 
             var enemies = [
                 new gChar(200, 225, width, width, "rgb(0,0,255)", 2),
@@ -54,7 +54,21 @@
             ];
 
             var goal = new gChar(screenWidth - width, 200, width, 100, "rgb(0,0,0)", 0);
+            var sprites = {};
 
+            var loadSprites = function() {
+                sprites.player = new Image();
+                sprites.player.src = 'images/hero.png';
+
+                sprites.background = new Image();
+                sprites.background.src = 'images/floor.png';
+
+                sprites.enemy = new Image();
+                sprites.enemy.src = 'images/enemy.png';
+
+                sprites.goal = new Image();
+                sprites.goal.src = 'images/chest.png';
+            } 
 
             document.onkeydown = function(event){
                 let keyPressed = event.keyCode;
@@ -78,17 +92,12 @@
             var draw = function(){
                 ctx.clearRect(0, 0, screenWidth, screenHeight);
 
-                ctx.fillStyle = player.color;
-                ctx.fillRect(player.x, player.y, player.width, player.height);
-
-                ctx.fillStyle = goal.color;
-                ctx.fillRect(goal.x, goal.y, goal.width, goal.height);
-
-                enemies.forEach(function(element){
-                    ctx.fillStyle = element.color;
-                    ctx.fillRect(element.x, element.y, element.width, element.height);
+                ctx.drawImage(sprites.background, 0, 0);
+                ctx.drawImage(sprites.player, player.x, player.y);
+                ctx.drawImage(sprites.goal, goal.x, goal.y);
+                enemies.forEach(function(element) {
+                ctx.drawImage(sprites.enemy, element.x, element.y);
                 });
-
             }
 
             var update = function(){
@@ -120,6 +129,7 @@
                 }
             }
 
+            loadSprites();
             step();
 
         </script>
