@@ -30,6 +30,7 @@
                     this.height = height;
                     this.color = color;
                     this.speed = speed;
+                    this.maxSpeed = 4
                 }
                 moveY(){
                     if (this.y >  screenHeight - 100 || this.y < 50){
@@ -38,20 +39,31 @@
                     this.y += this.speed;
                 }
                 moveX(){
-                    if(this.x > screenWidth - 5 || this.x < 5){
-                        this.x;
-                    }
+                
                     this.x += this.speed;
                 }
             }
 
-            var player = new gChar(50, 225, width, width, "rgb(0,255,0)", 2)
+            var player = new gChar(50, 225, width, width, "rgb(0,255,0)", 0)
 
             var enemies = [
                 new gChar(200, 225, width, width, "rgb(0,0,255)", 2),
                 new gChar(450, screenHeight-100, width, width, "rgb(0,0,255)", 3),
                 new gChar(700, 50, width, width, "rgb(0,0,255)", 4)
             ];
+
+            document.onkeydown = function(event){
+                let keyPressed = event.keyCode;
+                if (keyPressed == 39 || keyPressed == 68){
+                    player.speed = player.maxSpeed;
+                } else if (keyPressed == 37 || keyPressed == 65){
+                    player.speed = -player.maxSpeed;
+                }
+            };
+
+            document.onkeyup = function(event) {
+                player.speed = 0;
+            };
 
             var draw = function(){
                 ctx.clearRect(0, 0, screenWidth, screenHeight);
@@ -67,6 +79,8 @@
             }
 
             var update = function(){
+                player.moveX();
+
                 enemies.forEach(function(element){
                     element.moveY();
                 });
