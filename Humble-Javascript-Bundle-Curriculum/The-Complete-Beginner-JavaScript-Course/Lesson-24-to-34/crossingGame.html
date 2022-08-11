@@ -22,6 +22,8 @@
             let screenHeight = 500;
             let width = 50;
             var isGameLive = true;
+            var isLeftKeyPressed = false;
+            var isRightKeyPressed = false;
 
             class gChar {
                 constructor(x, y, width, height, color, speed){
@@ -73,14 +75,31 @@
             document.onkeydown = function(event){
                 let keyPressed = event.keyCode;
                 if (keyPressed == 39 || keyPressed == 68){
+                    isRightKeyPressed = true;
                     player.speed = player.maxSpeed;
                 } else if (keyPressed == 37 || keyPressed == 65){
+                    isLeftKeyPressed = true;
                     player.speed = -player.maxSpeed;
                 }
             };
 
             document.onkeyup = function(event) {
-                player.speed = 0;
+                var keyUp = event.keyCode;
+                if(keyUp == 39 || keyUp == 68){ 
+                    isRightKeyPressed = false;
+                    if(isLeftKeyPressed){
+                        player.speed = -player.maxSpeed;
+                    } else{
+                        player.speed = 0;
+                    }
+                } else if ( keyUp == 37 || keyUp == 65){
+                    isLeftKeyPressed = false;
+                    if(isRightKeyPressed){
+                        player.speed = player.maxSpeed;
+                    } else{
+                        player.speed = 0;
+                    }
+                }
             };
 
             var checkCollisions = function(rect1, rect2) {
