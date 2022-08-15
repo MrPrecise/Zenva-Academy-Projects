@@ -8,6 +8,15 @@ var config ={
         create: create,
         update: update,
     },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: true,
+            gravity: {
+                y: 0,
+            }
+        }
+    }
 };
 
 var game = new Phaser.Game(config);
@@ -27,6 +36,8 @@ function create(){
 
  this.add.sprite(300, 100, 'button1');
  this.add.image(300, 300, 'items', 1);
+
+ this.physics.add.image(500, 100, 'button1');
 }
 
 function update(){
