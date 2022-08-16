@@ -27,7 +27,8 @@ function init(){
 
 function preload(){
     this.load.image('button1', 'assets/images/ui/blue_button01.png');
-    this.load.spritesheet('items', 'assets/images/items.png', {frameWidth: 32, frameHeight: 32})
+    this.load.spritesheet('items', 'assets/images/items.png', {frameWidth: 32, frameHeight: 32});
+    this.load.spritesheet('characters', 'assets/images/characters.png', {frameWidth: 32, frameHeight: 32});
 }
 
 function create(){
@@ -38,8 +39,26 @@ function create(){
  this.add.image(300, 300, 'items', 1);
 
  this.physics.add.image(500, 100, 'button1');
+
+ this.player =  this.physics.add.image(32, 32, 'characters', 0);
+ this.player.setScale(2);
+
+ this.curser = this.input.keyboard.createCursorKeys();
 }
 
 function update(){
+this.player.setVelocity(0);
+
+    if(this.curser.left.isDown){
+        this.player.setVelocityX(-160);
+    } else if(this.curser.right.isDown){
+        this.player.setVelocityX(160);
+    } 
+
+    if(this.curser.down.isDown){
+        this.player.setVelocityY(160);
+    } else if(this.curser.up.isDown){
+        this.player.setVelocityY(-160);
+    } 
 
 }
