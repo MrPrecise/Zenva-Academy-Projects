@@ -25,4 +25,4 @@ Learn the basics of building an RPG in Phaser 3, a popular HTML5 framework. This
 ## How to open the project?
 The way I did it is through an free local web server from a Chrome extension whic you can find here: [Web Server](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
 
-Select the home directory of Phaser and you will get the web server up and running on IP:Port -   [http://127.0.0.1:8887](http://127.0.0.1:8887/) and can play the game from there
+Select this directory and you will get the web server up and running on IP:Port -   [http://127.0.0.1:8887](http://127.0.0.1:8887/) and can play the game from there
