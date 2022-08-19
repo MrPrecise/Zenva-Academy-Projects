@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <head>
-            <style>
-              #div1 {
-                background-color: #00ff00;
-              }
-            </style>
-          </head>
+        <style>
+          #div1 {
+            background-color: #00ff00;
+          }
+        </style>
     </head>
     <body>
         <div class='class1' id='div1'>
-            Hello
-            <div class='class1'>World!</div>
-          </div>
-          <button class='class1' id='button1'>Press me</button>
+          Hello
+          <div class='class1'>World!</div>
+        </div>
+        <button class='class1' id='button1'>Press me</button>
         <script>
+            
+        document.addEventListener('DOMContentLoaded', function(event){
+                alert('Page has been loaded');
+            });
+        document.getElementById('div1').addEventListener('mouseover', function(event) {
+                event.target.style.backgroundColor = '0000ff';
+            });
+        var button1 = document.getElementById('button1');
+        button1.addEventListener('click', function(event){
+                target = event.target
+                alert(target.innerHTML);
+            });
 
-            var div1 = document.getElementById('div1');
-            var newDiv = document.createElement('div');
-            newDiv.innerHTML = 'Hello there!';
-            div1.appendChild(newDiv);
-            document.body.removeChild(div1)
+
+            // var div1 = document.getElementById('div1');
+            // var newDiv = document.createElement('div');
+            // newDiv.innerHTML = 'Hello there!';
+            // div1.appendChild(newDiv);
+            // document.body.removeChild(div1)
 
 
             // var div1 = document.getElementById('div1');
