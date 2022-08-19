@@ -17,15 +17,22 @@
           <button class='class1' id='button1'>Press me</button>
         <script>
 
-    var div1 = document.getElementById('div1');
-    var div1Class = div1.getAttribute('class');
-    var div1HTML = div1.innerHTML;
-    var noValueDiv1Color = div1.style.backgroundColor;
-    var div1ComputedStyle = window.getComputedStyle(div1).backgroundColor
-    div1.setAttribute('class', 'class2');
-    div1.innerHTML = 'Goodbye'
-    div1.style.backgroundColor = '#0000ff';
-    div1.setAttribute('style', 'height: 100px;');
+            var div1 = document.getElementById('div1');
+            var newDiv = document.createElement('div');
+            newDiv.innerHTML = 'Hello there!';
+            div1.appendChild(newDiv);
+            document.body.removeChild(div1)
+
+
+            // var div1 = document.getElementById('div1');
+            // var div1Class = div1.getAttribute('class');
+            // var div1HTML = div1.innerHTML;
+            // var noValueDiv1Color = div1.style.backgroundColor;
+            // var div1ComputedStyle = window.getComputedStyle(div1).backgroundColor
+            // div1.setAttribute('class', 'class2');
+            // div1.innerHTML = 'Goodbye'
+            // div1.style.backgroundColor = '#0000ff';
+            // div1.setAttribute('style', 'height: 100px;');
 
         
             // var class1 = document.getElementsByClassName("class1");
