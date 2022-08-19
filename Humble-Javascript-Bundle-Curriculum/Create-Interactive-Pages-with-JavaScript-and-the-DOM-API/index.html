@@ -9,23 +9,37 @@
     </head>
     <body>
         <div class='class1' id='div1'>
-          Hello
-          <div class='class1'>World!</div>
-        </div>
-        <button class='class1' id='button1'>Press me</button>
-        <script>
-            
-        document.addEventListener('DOMContentLoaded', function(event){
-                alert('Page has been loaded');
+            Hello
+            <div class='class1'>World!</div>
+          </div>
+          <button class='class1' id='button1'>Press me</button>
+          <form id='form'>
+            Name: <input type='text'>
+            <input type='submit' value='Save'>
+          </form>
+        
+          <script>
+            var form = document.getElementById('form');
+            form.addEventListener('submit', function(event){
+              event.preventDefault()
+              var textInput = form.elements[0]
+              alert(textInput.value)
             });
-        document.getElementById('div1').addEventListener('mouseover', function(event) {
-                event.target.style.backgroundColor = '0000ff';
-            });
-        var button1 = document.getElementById('button1');
-        button1.addEventListener('click', function(event){
-                target = event.target
-                alert(target.innerHTML);
-            });
+        
+
+
+
+            // document.addEventListener('DOMContentLoaded', function(event){
+            //         alert('Page has been loaded');
+            //     });
+            // document.getElementById('div1').addEventListener('mouseover', function(event) {
+            //         event.target.style.backgroundColor = '0000ff';
+            //     });
+            // var button1 = document.getElementById('button1');
+            // button1.addEventListener('click', function(event){
+            //         target = event.target
+            //         alert(target.innerHTML);
+            //     });
 
 
             // var div1 = document.getElementById('div1');
