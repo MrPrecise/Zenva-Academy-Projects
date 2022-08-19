@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="class1" id="div1">Hello
+            <div class="class1">World</div>
+        </div>
+        <button class="class1" id="button1">Press me</button>
+        <script>
+            var class1 = document.getElementsByClassName("class1");
+            var button1 = document.getElementById("button1");
+            var divs = document.getElementsByName("DIV");
+            var first = document.querySelector(".class1");
+            var all = document.querySelectorAll(".class1")
+            var div1 = document.getElementById("div1");
+            var innerDivs = div1.getElementsByTagName('class1');
+            alert(divs[0].innerHTML);
+        </script>
+    </body>
+</html>
