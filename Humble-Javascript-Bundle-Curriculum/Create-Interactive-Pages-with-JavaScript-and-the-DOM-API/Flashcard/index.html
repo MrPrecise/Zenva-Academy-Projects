@@ -36,7 +36,7 @@
     .card-answer {
       display: none;
     }
-    
+
         </style>
     </head>
     <body>
@@ -67,6 +67,21 @@
                 <div class="card-title">Chair</div>
                 <button class="card-button">Show</button>
                 <div class="card-answer">Silla</div>
+
+                <script>
+                    var B1 = document.getElementsByClassName("card-button")[0];
+                    var A1 = document.getElementsByClassName("card-answer")[0];
+                    B1.addEventListener("click", function(event){
+                        if(B1.innerHTML == "Show"){
+                            A1.style.display = "Block";
+                            B1.innerHTML = "Hide";
+                        } else if (B1.innerHTML == "Hide"){
+                            A1.style.display = "none";
+                            B1.innerHTML = "Show";
+                        }
+                        
+                    })
+                </script>
             </div> 
         </div>
     </body>
