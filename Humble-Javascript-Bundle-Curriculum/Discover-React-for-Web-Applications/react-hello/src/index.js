@@ -10,10 +10,13 @@ function HelloWorld(){
 }
 
 function Hello(){
-  const name = "World!";
+  var isHello = false;
   return(
-    <span>Hello {name}</span>
-  )
+   <span>
+    {isHello && "Hello"}
+    {!isHello && "Goodbye"}
+    </span>
+  );
 }
 
 // function World(){
