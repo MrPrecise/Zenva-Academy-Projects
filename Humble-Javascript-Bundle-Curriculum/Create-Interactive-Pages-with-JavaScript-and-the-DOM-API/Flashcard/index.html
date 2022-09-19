@@ -1,5 +1,44 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+    body {
+      padding: 40px;
+      background: #5f9fff;
+      font-family: courier;
+    }
+    .container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+    }
+    .card {
+      flex: none;
+      margin-top: 10px;
+      padding: 20px;
+      border-radius: 10px;
+      background: white;
+    }
+    .card-title, .card-answer {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold
+    }
+
+    .card-button {
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid #0070bb;
+      background: white;
+      color: #0070bb;
+    }
+    .card-answer {
+      display: none;
+    }
+    
+        </style>
+    </head>
     <body>
         <div class="container">
             <div class="card">
@@ -8,24 +47,21 @@
                 <button class="card-button">Show</button>
                 <div class="card-answer">Manzana</div>
             </div> 
-        </div>
-        <div class="container">
+       
             <div class="card">
                 <div><img src="images/dog.png" alt="Dog"></div>
                 <div class="card-title">Dog</div>
                 <button class="card-button">Show</button>
                 <div class="card-answer">Perro</div>
             </div> 
-        </div>
-        <div class="container">
+     
             <div class="card">
                 <div><img src="images/city.png" alt="City"></div>
                 <div class="card-title">City</div>
                 <button class="card-button">Show</button>
                 <div class="card-answer">Ciudad</div>
             </div> 
-        </div>
-        <div class="container">
+      
             <div class="card">
                 <div><img src="images/chair.png" alt="Chair"></div>
                 <div class="card-title">Chair</div>
