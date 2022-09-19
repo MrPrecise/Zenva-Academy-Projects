@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+              padding: 40px;
+              font-family: Arial;
+            }
+            .container {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              padding: 10px;
+              width: 200px;
+              height: 300px;
+              border: thick solid #0f6b89;
+              background-color: #1ebdf1;
+            }
+            .textInput {
+              margin-bottom: 10px;
+              width: 100%;
+            }
+            #petSelection {
+              margin-top: 10px;
+              display: none;
+            }
+            #saveButton {
+              position: absolute;
+              right: 20px;
+              bottom: 20px;
+              background-color: #0f6b89;
+              color: white;
+            }
+          </style>
+    </head>
+    <body>
+        <div class="container">
+            <form id="saveForm">
+              Name: <br><input class="textInput" type="text"><br>
+              Address: <br><input class="textInput" type="text"><br>
+              Age: <br><input class="textInput" type="text"><br>
+              Pets: <br><input id="petCheckbox" type="checkbox"><br>
+              <div id="petSelection">
+                Pet: <br><select>
+                  <option value="">Dog</option>
+                  <option value="">Cat</option>
+                  <option value="">Bird</option>
+                  <option value="">Other</option>
+                </select><br>
+              </div>
+              <br><input id="saveButton" type="submit" value="Save">
+            </form>
+          </div>
+    </body>
+</html>
