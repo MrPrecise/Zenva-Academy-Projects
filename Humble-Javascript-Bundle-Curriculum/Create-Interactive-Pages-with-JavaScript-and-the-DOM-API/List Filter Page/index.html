@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+        <style>
+            body {
+              padding: 40px;
+              background: #0dbcc9;
+              font-family: Arial;
+        }
+            h1 {
+              text-align: center;
+              color: white;
+        }
+            .search-container {
+            display: flex;
+            justify-content: space-around;
+        }
+            #search-bar {
+            width: 80%;
+            height: 40px;
+            font-size: 20px;
+        }
+            .adventures-container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin: 40px;
+        }
+            .adventure {
+            width: 120px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: white;
+         }
+            
+        </style>
+    </head>
     <body>
         <h1>Find your local adventure</h1>
         <div class="search-container"><input id="search-bar" type="text"></div>
