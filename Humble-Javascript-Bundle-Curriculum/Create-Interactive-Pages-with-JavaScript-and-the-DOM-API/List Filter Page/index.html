@@ -50,5 +50,24 @@
             <div class='adventure'>Snorkelling Tour</div>
             <div class='adventure'>Forest Experience</div>
         </div>
+        <script>
+            var aList = [];
+            var a = document.getElementsByClassName("adventure");
+            for (var i = 0; i < a.length; i++){
+                var aName = a[i].innerHTML;
+                aList.push(aName);
+            }
+            var searchBar = document.getElementById("search-bar");
+            searchBar.addEventListener("keyup", function(event){
+                var text = searchBar.value;
+                for (var i = 0; i < a.length; i++) {
+                    if (aList[i].indexOf(text) < 0) {
+                        a[i].style.display = "None";
+                    } else {
+                        a[i].style.display = "Block";  
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
