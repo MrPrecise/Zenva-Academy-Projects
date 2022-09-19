@@ -69,18 +69,22 @@
                 <div class="card-answer">Silla</div>
 
                 <script>
-                    var B1 = document.getElementsByClassName("card-button")[0];
-                    var A1 = document.getElementsByClassName("card-answer")[0];
-                    B1.addEventListener("click", function(event){
-                        if(B1.innerHTML == "Show"){
-                            A1.style.display = "Block";
-                            B1.innerHTML = "Hide";
-                        } else if (B1.innerHTML == "Hide"){
-                            A1.style.display = "none";
-                            B1.innerHTML = "Show";
+                    var cards = document.getElementsByClassName("card");
+                    for (var cardIndex in cards){
+                        var button = cards[cardIndex].querySelector(".card-button");
+                        button.addEventListener('click', function(event){
+                            var cButton = event.target;
+                            var cCard = cButton.parentNode;
+                            var cAnswer = cCard.querySelector(".card-answer");
+                            if(cButton.innerHTML == "Show"){
+                            cAnswer.style.display = "Block";
+                            cButton.innerHTML = "Hide";
+                        } else if (cButton.innerHTML == "Hide"){
+                            cAnswer.style.display = "none";
+                            cButton.innerHTML = "Show";
                         }
-                        
-                    })
+                        })
+                    }
                 </script>
             </div> 
         </div>
