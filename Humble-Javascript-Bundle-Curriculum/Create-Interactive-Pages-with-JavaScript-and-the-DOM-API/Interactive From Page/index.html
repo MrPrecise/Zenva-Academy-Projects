@@ -54,5 +54,16 @@
               <br><input id="saveButton" type="submit" value="Save">
             </form>
           </div>
+          <script>
+            var checkbox = document.getElementById("petCheckbox");
+            var selectionDiv = document.getElementById("petSelection");
+            checkbox.addEventListener("change", function(event){
+                if (checkbox.checked == true) {
+                    selectionDiv.style.display = "Block";
+                } else {
+                     selectionDiv.style.display = "None";
+                }
+    });
+          </script>
     </body>
 </html>
