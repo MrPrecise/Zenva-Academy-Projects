@@ -1,4 +1,3 @@
-
 # Create Interactive Pages with JavaScript and the DOM API
 
 ### Frameworks and Tools
