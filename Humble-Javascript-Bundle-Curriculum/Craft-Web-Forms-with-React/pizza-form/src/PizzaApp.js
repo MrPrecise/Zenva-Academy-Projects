@@ -1,11 +1,64 @@
 import React from 'react';
+import './index.css';
 
 class PizzaApp extends React.Component {
+    state = {
+        size: 'medium',
+        glutenFree: false,
+        topping: '',
+        instructions: ''
+    };
+
+    setSize = event => {
+        this.setState({
+            size: event.target.value
+        });
+    };
+    setInstructions = event => {
+        this.setState({
+            instructions: event.target.value
+        });
+    };
+    setTopping = event => {
+        this.setState({
+            topping: event.target.value
+        });
+    };
+    setGlutenFree = event => {
+        this.setState({
+            glutenFree: event.target.checked
+        });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const {
+            size,
+            glutenFree,
+            topping,
+            instructions
+        } = this.state;
+        alert(`Your order:
+        Size: ${ size }
+        Gluten free ? ${glutenFree ? 'yes' : 'no'}
+        Topping: ${topping || 'none'}
+        Special instructions: ${instructions || 'none'}`);
+    }
+
+
     render() {
+        const {
+            size,
+            glutenFree,
+            instructions,
+            topping
+        } = this.state;
+
+
         return (
             <>
             <h1>Order Your Pizza</h1>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     <input
                         type="radio"
@@ -33,8 +86,43 @@ class PizzaApp extends React.Component {
                     />
                     Large
                 </label>
+                <br />
+                <br />
+                <label>
+                    Topping
+                    <br />
+                    <select onChange={this.setTopping} value={topping}>
+                    <option value="">- Pick a topping -</option>
+                    <option value="pepperoni">Pepperoni</option>
+                    <option value="peppers+onions">Peppers and onions</option>
+                    <option value="pineapple">Pineapple</option>
+                </select>
+                </label>
+                <br/>
+                <br/>
+                <label>
+                    <input type="checkbox"
+                    checked={glutenFree}
+                    onChange={this.setGlutenFree}/>
+                    Gluten Free
+                </label>
+                <br />
+                <br />
+                <label>
+                    Special instructions:
+                    <br/>
+                    <textarea
+                    value={instructions}
+                    onChange={this.setInstructions}
+                    />
+                </label>
+                <br />
+                <br />
+                <button type="submit"> Send Order </button>
             </form>
             </>
         );
     }
 }
+
+export default PizzaApp;
