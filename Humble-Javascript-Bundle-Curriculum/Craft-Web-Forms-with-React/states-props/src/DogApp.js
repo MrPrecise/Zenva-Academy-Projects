@@ -29,7 +29,8 @@ class DogApp  extends React.Component {
                 type="text"
                 placeholder="Enter Dog Name"
                 onChange={this.handleChange.bind(this)} 
-                name="newDog" />
+                name="newDog"
+                value={this.state.newDog} />
                 <ul> 
                     {this.state.dogs.map((dogs, i) => (
                        <Dog key={`${dogs}_${i}`} name={dogs}/> 
