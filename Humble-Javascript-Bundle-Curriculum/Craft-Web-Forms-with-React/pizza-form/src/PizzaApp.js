@@ -14,7 +14,8 @@ const validateForm = (errors) => {
 }
 
 class PizzaApp extends React.Component {
-    state = {
+    
+  state = {
         size: 'medium',
         glutenFree: false,
         topping: '',
@@ -50,7 +51,7 @@ class PizzaApp extends React.Component {
   setTopping = event => {
     this.setState({
       topping: event.target.value
-    });
+     });
   };
  
   handleChange = (event) => {
