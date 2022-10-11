@@ -1,23 +1,27 @@
-import React from "react";
+import React from 'react';
 
-class DogApp  extends React.Component {
+
+class DogApp extends React.Component {
+
     state = {
-        newDog: '',
+        nameOfNewDog: '',
         dogs: []
     }
+
     handleChange(e) {
         this.setState({
-            newDog: e.target.value
+            nameOfNewDog: e.target.value
         });
     }
 
     handleAddDogClick() {
-        if (!this.state.newDog) {
+        if (!this.state.nameOfNewDog.length) {
             return;
         }
+
         this.setState({
-            newDog: '',
-            dogs: [...this.state.dogs, this.state.newDog]
+            nameOfNewDog: '',
+            dogs: [...this.state.dogs, this.state.nameOfNewDog]
         });
     }
 
@@ -25,27 +29,22 @@ class DogApp  extends React.Component {
         return (
             <div>
                 <h1>My Dogs</h1>
-                <input 
-                type="text"
-                placeholder="Enter Dog Name"
-                onChange={this.handleChange.bind(this)} 
-                name="newDog"
-                value={this.state.newDog} />
-                <ul> 
+                <input type="text" value={this.state.nameOfNewDog} placeholder="Enter a dog name" onChange={this.handleChange.bind(this)} name="nameOfNewDog"/>
+                <ul>
                     {this.state.dogs.map((dogs, i) => (
-                       <Dog key={`${dogs}_${i}`} name={dogs}/> 
-                        // Old code before making Dog into an own class
+                        <Dog key={`${dogs}_${i}`} name={dogs}/>
                         // <li key={`${dogs}_${i}`}>
                         //     <b>{dogs}</b>
                         // </li>
                     ))}
                 </ul>
                 <button onClick={this.handleAddDogClick.bind(this)}>
-                  Add a dog
+                    Add a dog
                 </button>
             </div>
         );
     }
+
 }
 
 class Dog extends React.Component {
@@ -53,7 +52,8 @@ class Dog extends React.Component {
         return (
             <li>
                 <b>{this.props.name}</b>
-            </li>)
+            </li>
+        );
     }
 }
 

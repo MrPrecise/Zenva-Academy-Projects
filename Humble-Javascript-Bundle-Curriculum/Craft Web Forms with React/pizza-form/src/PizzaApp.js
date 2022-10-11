@@ -7,6 +7,7 @@ const validEmailRegex =
 const validateForm = (errors) => {
   let valid = true;
   Object.values(errors).forEach(
+    //if we have an error string set valid to false
     (val) => val.length > 0 && (valid = false)
   );
 
@@ -14,8 +15,7 @@ const validateForm = (errors) => {
 }
 
 class PizzaApp extends React.Component {
-    
-  state = {
+    state = {
         size: 'medium',
         glutenFree: false,
         topping: '',
@@ -51,7 +51,7 @@ class PizzaApp extends React.Component {
   setTopping = event => {
     this.setState({
       topping: event.target.value
-     });
+    });
   };
  
   handleChange = (event) => {
