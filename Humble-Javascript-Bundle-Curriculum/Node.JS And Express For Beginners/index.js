@@ -9,17 +9,17 @@ app.get('/',  (request, response) => {
 
 app.get('/1',  (request, response) => {
     console.log(request);
-    response.send('Page One');
+    response.send('Cool Stuff');
 });
 
 app.get('/2',  (request, response) => {
-    response.send('Page 2');
+    response.send('We\'re fucked');
 });
 
 app.get('/3',  (request, response) => {
-    response.send('3');
+    response.send('Not fun time');
 });
 
 app.listen(port, ()=>{
     console.log(`This is port ${port}`)
-})
+})  
