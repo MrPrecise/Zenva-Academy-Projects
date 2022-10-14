@@ -12,15 +12,36 @@ app.get ('/status', (request, response) => {
 });
 
 app.post('/signup',  (request, response, next) => {
-    next(new Error('Test'))
+    console.log(request.body);
+    if(!request.body){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
     response.status(200).json({message: 'OK', status: 200});
+}
 });
 app.post('/login',  (request, response) => {
+    if(!request.body){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
     response.status(200).json({message: 'OK', status: 200});
+}
+});
+
+app.post('/logout',  (request, response) => {
+    if(!request.body){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
+    response.status(200).json({message: 'OK', status: 200});
+}
 });
 
 app.post('/token',  (request, response) => {
-    response.status(200).json({message: 'OK', status: 200});
+    if(!request.body || !request.body.refreshToken){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
+        const {refreshToken} = request.body;
+    response.status(200).json({message: `Refresh token requested: ${refreshToken}`, status: 200});
+}
 });
 
 app.post('/forgot-password',  (request, response) => {
