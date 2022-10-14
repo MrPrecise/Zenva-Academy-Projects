@@ -7,17 +7,12 @@ app.get('/',  (request, response) => {
     response.send('Main Page');
 });
 
-app.get('/1',  (request, response) => {
-    console.log(request);
-    response.send('Cool Stuff');
+app.get ('/status', (request, response) => {
+    response.status(200).json({message:'OK', status:200});
 });
 
-app.get('/2',  (request, response) => {
-    response.send('We\'re fucked');
-});
-
-app.get('/3',  (request, response) => {
-    response.send('Not fun time');
+app.post('/signup',  (request, response) => {
+    response.status(200).json({message: 'OK', status: 200});
 });
 
 app.listen(port, ()=>{
