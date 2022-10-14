@@ -1,6 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+
+
+// update express settings
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 app.get('/',  (request, response) => {
     console.log(request);
@@ -45,11 +52,21 @@ app.post('/token',  (request, response) => {
 });
 
 app.post('/forgot-password',  (request, response) => {
-    response.status(200).json({message: 'OK', status: 200});
+    if(!request.body || !request.body.email){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
+        const {email} = request.body;
+    response.status(200).json({message: `Reset url sent to: ${email}`, status: 200});
+}
 });
 
 app.post('/reset-password',  (request, response) => {
-    response.status(200).json({message: 'OK', status: 200});
+    if(!request.body || !request.body.email){
+        response.status(400).json({message: 'Invalid', status: 400});
+    }else{
+        const {email} = request.body;
+    response.status(200).json({message: `Reset url sent to: ${email}`, status: 200});
+}
 });
 
 // Catch not found Routes
