@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');s
+
 const app = express();
 const port = process.env.PORT || 3000;
 const routes = require('./routes/main')
@@ -9,6 +11,7 @@ const passwordRoutes = require('./routes/password')
 // Update express settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}))
 
 // Setup routes
 app.use('/', routes);
