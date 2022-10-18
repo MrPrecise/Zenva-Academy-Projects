@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/',  (request, response) => {
     console.log(request);
-    response.send('Main Page');
+    response.send('Ikkje installer korta');
 });
 
 router.get ('/status', (request, response) => {

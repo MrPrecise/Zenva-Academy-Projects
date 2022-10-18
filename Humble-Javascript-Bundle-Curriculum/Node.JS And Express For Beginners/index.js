@@ -2,19 +2,23 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+const routes = require('./routes/main')
+const passwordRoutes = require('./routes/password')
 
-
-// update express settings
+// Update express settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Setup routes
+app.use('/', routes);
+app.use('/', passwordRoutes);
 
 // Catch not found Routes
 app.use((request, response) => {
     response.status(404).json({ message: '404 - Not Found', status: 404 })
   })
 
-  // handle errors
+  // Handle errors
 app.use((error, request, response, next) => {
     console.log(error)
     response
