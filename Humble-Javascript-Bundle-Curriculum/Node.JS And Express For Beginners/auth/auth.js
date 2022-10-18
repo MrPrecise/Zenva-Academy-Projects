@@ -25,14 +25,16 @@ passport.use('signup', new localStrategy.Strategy({
  */
  passport.use('login', new localStrategy.Strategy({
     usernameField: 'email',
-    passwordField: 'password'
-}, ( email, password, done) =>{
-    if (email !== 'joe@test.com'){
-        return done(new Error('User not found'), false)
-    } 
-    if (password !== 'test'){
-        return done(new Error('Invalid Password'), false)
-    } 
-
-    return(null, {name: 'joe'})
-}));
+    passwordField: 'password',
+  }, async (email, password, done) => {
+    if (email !== 'joe@test.com') {
+      return done(new Error('user not found'), false);
+    }
+  
+    if (password !== 'test') {
+      return done(new Error('invalid password'), false);
+    }
+  
+    return done(null, { name: 'joe' });
+  }));
+  

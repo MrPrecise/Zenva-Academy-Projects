@@ -15,6 +15,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({credentials: true, origin: process.env.CORS_ORIGIN}))
 
+//Require Passort Auth
+require('./auth/auth')
+
 // Setup routes
 app.use('/', routes);
 app.use('/', passwordRoutes);
