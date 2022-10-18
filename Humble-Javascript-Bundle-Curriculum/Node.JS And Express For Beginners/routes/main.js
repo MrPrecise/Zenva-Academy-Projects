@@ -8,6 +8,7 @@ router.get('/',  (request, response) => {
 });
 
 router.get ('/status', (request, response) => {
+    response.cookie('Testing', 'Test')
     response.status(200).json({message:'OK', status:200});
 });
 
