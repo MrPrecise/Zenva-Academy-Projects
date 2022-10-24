@@ -10,12 +10,16 @@
   </head>
   <body>
     <div id="firstDiv">
-      <p>Hello!</p>
+      <p>Number is: {{ number }}</p>
     </div>
     <script>
       var firstVue = new Vue({
         el: "#firstDiv",
+        data: {
+          number: 4,
+        },
       });
+      firstVue.number = 10;
     </script>
   </body>
 </html>
