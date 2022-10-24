@@ -1,0 +1,45 @@
+html,
+body {
+  padding: 10px;
+  clear: both;
+  float: left;
+  background-color: darkblue;
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: gainsboro;
+}
+
+#blogPost {
+  padding: 10;
+  border-width: 2px;
+  border-style: solid;
+  border-style: blue;
+  background-color: cornflowerblue;
+  text-align: center;
+}
+
+#blogPostCreation {
+  border-width: 2px;
+  border-style: solid;
+  border-style: blue;
+  background-color: cornflowerblue;
+  text-align: center;
+}
+
+#blogPostCreation > *,
+#blogPost > * {
+  margin: 10px;
+}
+
+#blogPostCreation,
+#blogPost {
+  margin: 10px;
+}

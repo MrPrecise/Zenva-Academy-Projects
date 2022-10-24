@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="style.css" />
+    <title>Blog Site</title>
+  </head>
+  <body>
+    <section>
+      <div><h1>Welcome To My Blog!</h1></div>
+      <div id="blogPosts">
+        <blog-post
+          id="blogPost"
+          v-for="post in posts"
+          v-bind:blogpost="post"></blog-post>
+      </div>
+      <div id="blogPostCreation">
+        <h2>Make a new blog post</h2>
+        <input
+          placeholder="Title"
+          v-model="title" /><br />
+        <input
+          placeholder="Username"
+          v-model="username" /><br />
+        <input
+          placeholder="Date"
+          v-model="date" /><br />
+        <input
+          placeholder="Content"
+          v-model="content" /><br />
+        <button v-on:click="publishPost">Publish Post</button>
+      </div>
+      <script>
+        Vue.component("blog-post", {
+          props: ["blogpost"],
+          template: `<div id="blogPost">
+            <h2>{{ blogpost.title }}</h2>
+            <h3>{{ blogpost.username }}</h3>
+            <h4>{{ blogpost.date }}</h4>
+            <p>{{ blogpost.content }}</p>
+            </div>`,
+        });
+
+        var blogVue = new Vue({
+          el: "#blogPosts",
+          data: {
+            posts: [
+              {
+                title: "First Post",
+                username: "Eirik",
+                date: "Oct 20, 2022",
+                content: "Working on the course",
+              },
+              {
+                title: "Second Post",
+                username: "Eirik",
+                date: "Oct 20, 2022",
+                content: "Working my way through this course",
+              },
+            ],
+          },
+        });
+
+        var postBlogVue = new Vue({
+          el: "#blogPostCreation",
+          data: {
+            title: "",
+            username: "",
+            date: "",
+            content: "",
+          },
+          methods: {
+            publishPost: function () {
+              var newPost = {
+                title: this.title,
+                username: this.username,
+                date: this.date,
+                content: this.content,
+              };
+              blogVue.posts.push(newPost);
+              this.title = "";
+              this.username = "";
+              this.date = "";
+              this.content = "";
+            },
+          },
+        });
+      </script>
+    </section>
+  </body>
+</html>
