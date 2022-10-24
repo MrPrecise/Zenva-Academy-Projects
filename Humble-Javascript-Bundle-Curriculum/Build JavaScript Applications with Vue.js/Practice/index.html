@@ -19,6 +19,9 @@
           number: 4,
         },
       });
+      firstVue.$watch("number", function () {
+        alert("Number has changed");
+      });
       firstVue.number = 10;
     </script>
   </body>
