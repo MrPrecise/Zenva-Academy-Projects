@@ -9,9 +9,20 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <style
+      rel="stylesheet"
+      src="style.css"></style>
     <title>Blog Site</title>
   </head>
   <body>
     <h1>Welcome To My Blog!</h1>
+    <div id="blogPosts">
+      <div id="blogPost">
+        <h2>{{ bPost.title }}</h2>
+        <h3>{{ bPost.username }}</h3>
+        <h4>{{ bPost.date }}</h4>
+        <p>{{ bPost.content }}</p>
+      </div>
+    </div>
   </body>
 </html>
