@@ -10,6 +10,7 @@
   </head>
   <body>
     <div id="firstDiv">
+      <input v-model="number" />
       <p>Number is: {{ number }}</p>
       <ul>
         <li v-for="x in numbers">{{ x }}</li>
@@ -18,6 +19,7 @@
     <div id="secondDiv">
       <p v-if="isDoorOpen">Come In</p>
       <p v-else-if="!isDoorOpen">Stay Out!</p>
+      <button v-on:click="openClosedDoor">Open/Close Door</button>
     </div>
     <script>
       var firstVue = new Vue({
@@ -36,6 +38,11 @@
         el: "#secondDiv",
         data: {
           isDoorOpen: false,
+        },
+        methods: {
+          openClosedDoor: function () {
+            this.isDoorOpen = !this.isDoorOpen;
+          },
         },
       });
     </script>
