@@ -11,18 +11,33 @@
   <body>
     <div id="firstDiv">
       <p>Number is: {{ number }}</p>
+      <ul>
+        <li v-for="x in numbers">{{ x }}</li>
+      </ul>
+    </div>
+    <div id="secondDiv">
+      <p v-if="isDoorOpen">Come In</p>
+      <p v-else-if="!isDoorOpen">Stay Out!</p>
     </div>
     <script>
       var firstVue = new Vue({
         el: "#firstDiv",
         data: {
           number: 4,
+          numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          z: 1,
         },
       });
-      firstVue.$watch("number", function () {
-        alert("Number has changed");
+      // firstVue.$watch("number", function () {
+      //   alert("Number has changed");
+      // });
+      // firstVue.number = 10;
+      var secondVue = new Vue({
+        el: "#secondDiv",
+        data: {
+          isDoorOpen: false,
+        },
       });
-      firstVue.number = 10;
     </script>
   </body>
 </html>
