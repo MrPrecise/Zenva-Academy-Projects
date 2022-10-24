@@ -21,6 +21,13 @@
       <p v-else-if="!isDoorOpen">Stay Out!</p>
       <button v-on:click="openClosedDoor">Open/Close Door</button>
     </div>
+    <div id="thirdDiv">
+      <ul>
+        <grocery-item
+          v-for="item in groceryItems"
+          v-bind:groceryitems="item"></grocery-item>
+      </ul>
+    </div>
     <script>
       var firstVue = new Vue({
         el: "#firstDiv",
@@ -30,10 +37,12 @@
           z: 1,
         },
       });
+
       // firstVue.$watch("number", function () {
       //   alert("Number has changed");
       // });
       // firstVue.number = 10;
+
       var secondVue = new Vue({
         el: "#secondDiv",
         data: {
@@ -43,6 +52,23 @@
           openClosedDoor: function () {
             this.isDoorOpen = !this.isDoorOpen;
           },
+        },
+      });
+
+      Vue.component("grocery-item", {
+        props: ["groceryitems"],
+        template:
+          "<li>{{ groceryitems.quantity }} {{ groceryitems.name }}</li>",
+      });
+
+      var thirdVue = new Vue({
+        el: "#thirdDiv",
+        data: {
+          groceryItems: [
+            { name: "Bread", quantity: 2 },
+            { name: "Cheese", quantity: 4 },
+            { name: "Cake", quantity: 1 },
+          ],
         },
       });
     </script>
