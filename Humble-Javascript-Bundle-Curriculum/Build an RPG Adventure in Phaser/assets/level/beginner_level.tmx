@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="10">
+ <editorsettings>
+  <export target="beginner_level.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="background" tilewidth="32" tileheight="32" tilecount="1504" columns="32">
+  <image source="background.png" width="1024" height="1504"/>
+ </tileset>
+ <layer id="1" name="Background" width="10" height="8" locked="1">
+  <data encoding="csv">
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300,
+300,300,300,300,300,300,300,300,300,300
+</data>
+ </layer>
+ <layer id="2" name="Blocked" width="10" height="8" locked="1">
+  <data encoding="csv">
+843,0,0,0,1476,1476,0,0,0,843,
+0,0,0,0,1476,1476,0,0,0,0,
+0,0,0,0,1476,1476,0,0,0,0,
+0,0,0,779,1476,1476,779,0,0,0,
+0,0,0,779,1476,1476,779,0,0,0,
+0,0,0,0,1476,1476,0,0,0,0,
+0,0,0,0,1476,1476,0,0,0,0,
+843,0,0,0,1476,1476,0,0,0,843
+</data>
+ </layer>
+ <objectgroup id="3" name="Object" locked="1">
+  <object id="9" gid="86" x="48.6737" y="202.835" width="32" height="32">
+   <properties>
+    <property name="name" value="Chest"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
