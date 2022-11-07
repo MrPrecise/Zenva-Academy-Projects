@@ -1,0 +1,96 @@
+{ "compressionlevel":-1,
+ "height":8,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300,
+            300, 300, 300, 300, 300, 300, 300, 300, 300, 300],
+         "height":8,
+         "id":1,
+         "name":"Background",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[843, 0, 0, 0, 1476, 1476, 0, 0, 0, 843,
+            0, 0, 0, 0, 1476, 1476, 0, 0, 0, 0,
+            0, 0, 0, 0, 1476, 1476, 0, 0, 0, 0,
+            0, 0, 0, 779, 1476, 1476, 779, 0, 0, 0,
+            0, 0, 0, 779, 1476, 1476, 779, 0, 0, 0,
+            0, 0, 0, 0, 1476, 1476, 0, 0, 0, 0,
+            0, 0, 0, 0, 1476, 1476, 0, 0, 0, 0,
+            843, 0, 0, 0, 1476, 1476, 0, 0, 0, 843],
+         "height":8,
+         "id":2,
+         "name":"Blocked",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"Object",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":86,
+                 "height":32,
+                 "id":9,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Chest"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":48.6736842105263,
+                 "y":202.835087719298
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":4,
+ "nextobjectid":10,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.9.2",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "columns":32,
+         "firstgid":1,
+         "image":"background.png",
+         "imageheight":1504,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"background",
+         "spacing":0,
+         "tilecount":1504,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "type":"map",
+ "version":"1.9",
+ "width":10
+}
