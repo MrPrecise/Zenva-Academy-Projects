@@ -44,8 +44,6 @@ class PlayerContainer extends Phaser.GameObjects.Container {
 
     // create the player healthbar
     this.createHealthBar();
-      
-      this.key = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
   }
 
   createHealthBar() {
