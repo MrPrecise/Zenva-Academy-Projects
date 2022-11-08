@@ -25,7 +25,9 @@ export default class Game {
     this.createGrid();
     this.load();
   }
-  render() {}
+  render() {
+    this.grid.render();
+  }
   update() {}
   load() {
     console.log("Loading Assets");
