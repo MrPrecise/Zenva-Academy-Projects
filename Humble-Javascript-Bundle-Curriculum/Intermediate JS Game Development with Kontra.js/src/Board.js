@@ -37,8 +37,27 @@ export default class Board {
 
   consoleLog() {
     if (this.debug) {
-      console.log(this.grid);
-      console.log(this.reserveGrid);
+      let aString = "";
+      for (let i = 0; i < this.rows; i++) {
+        aString += "\n";
+        for (let j = 0; j < this.cols; j++) {
+          aString += " " + this.reserveGrid[i][j];
+        }
+      }
+
+      aString += "\n";
+      for (let j = 0; j < this.cols; j++) {
+        aString += " -";
+      }
+
+      for (let i = 0; i < this.rows; i++) {
+        aString += "\n";
+        for (let j = 0; j < this.cols; j++) {
+          aString += " " + this.grid[i][j];
+        }
+      }
+
+      console.log(aString);
     }
   }
 }
