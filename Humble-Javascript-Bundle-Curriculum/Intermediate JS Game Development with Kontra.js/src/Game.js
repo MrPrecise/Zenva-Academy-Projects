@@ -1,9 +1,13 @@
+import Grid from "./Grid.js";
 const { init, GameLoop, Sprite, initPointer, track } = kontra;
 
 export default class Game {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.numberOfCols = 8;
+    this.numberOfRows = 8;
+    this.blockSize = 35;
     this.init();
   }
 
@@ -18,6 +22,7 @@ export default class Game {
       render: this.render.bind(this),
     });
 
+    this.createGrid();
     this.load();
   }
   render() {}
@@ -29,5 +34,16 @@ export default class Game {
   start() {
     console.log("Starting Game");
     this.gameLoop.start();
+  }
+
+  createGrid() {
+    this.grid = new Grid({
+      numberOfRows: this.numberOfRows,
+      numberOfCols: this.numberOfCols,
+      cellSize: this.blockSize + 4,
+      x: 25,
+      y: 180,
+      color: "lavender",
+    });
   }
 }
