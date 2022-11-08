@@ -199,4 +199,31 @@ export default class Board {
     this.reserveGrid[sourceRow][col] = 0;
     this.consoleLog();
   }
+
+  updateGrid() {
+    for (let row = this.rows - 1; row >= 0; row--) {
+      for (let col = 0; col < this.cols; col++) {
+        if (this.grid[row][col] === 0) {
+          let foundBlock = false;
+          for (let rowAbove = row - 1; rowAbove >= 0; rowAbove--) {
+            if (this.grid[rowAbove][col] > 0) {
+              foundBlock = true;
+              this.dropBlock(rowAbove, row, col);
+              break;
+            }
+          }
+          if (!foundBlock) {
+            for (let rowAbove = this.rows - 1; rowAbove >= 0; rowAbove--) {
+              if (this.reserveGrid[rowAbove][col] > 0) {
+                this.dropReserveBlock(rowAbove, row, col);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    this.populateReserveGrid();
+    this.consoleLog();
+  }
 }
