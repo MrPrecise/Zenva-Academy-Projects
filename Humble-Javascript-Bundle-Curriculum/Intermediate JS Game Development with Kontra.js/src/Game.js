@@ -31,10 +31,22 @@ export default class Game {
   render() {
     this.grid.render();
     if (this.blockPool) {
-      this.blockPool.render();
+      this.blockPool.getAliveObjects().forEach((block) => {
+        if (block.selected) {
+          block.context.globalAlpha = 0.6;
+        } else {
+          block.context.globalAlpha = 1;
+        }
+        block.render();
+        block.context.globalAlpha = 1;
+      });
     }
   }
-  update() {}
+  update() {
+    if (this.blockPool) {
+      this.blockPool.update();
+    }
+  }
 
   load() {
     console.log("Loading Assets");
@@ -57,7 +69,7 @@ export default class Game {
       .then((assets) => {
         this.assets = assets;
         this.start();
-        console.log(this.assets);
+        // console.log(this.assets);
       })
       .catch((error) => {
         console.log(error);
@@ -82,7 +94,7 @@ export default class Game {
   }
 
   createBoard() {
-    this.board = new Board(this.numberOfRows, this.numberOfRows, 6, true);
+    this.board = new Board(this.numberOfRows, this.numberOfRows, 6, false);
     this.blockPool = Pool({
       create: () => {
         return new Block();
@@ -103,8 +115,40 @@ export default class Game {
           image: this.assets[this.board.grid[i][j]],
           ttl: Infinity,
         });
-        console.log(block);
+        // console.log(block);
+        block.onDown = () => {
+          this.pickBlock(block);
+        };
+        track(block);
       }
     }
+  }
+
+  pickBlock(block) {
+    if (this.isBoardBlocked) {
+      return;
+    }
+    if (!this.selectedBlock) {
+      block.selected = true;
+      this.selectedBlock = block;
+    } else {
+      this.targetBlock = block;
+      if (this.board.checkAdjacent(this.selectedBlock, this.targetBlock)) {
+        this.isBoardBlocked = true;
+        this.swapBlocks(this.selectedBlock, this.targetBlock);
+      } else {
+        this.clearSelection();
+      }
+    }
+  }
+
+  swapBlocks(block1, block2) {
+    console.log(block1, block2);
+  }
+
+  clearSelection() {
+    this.isBoardBlocked = false;
+    this.selectedBlock.selected = false;
+    this.selectedBlock = null;
   }
 }

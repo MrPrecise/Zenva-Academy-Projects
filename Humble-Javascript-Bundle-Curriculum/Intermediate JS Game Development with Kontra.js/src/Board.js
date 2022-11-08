@@ -78,7 +78,7 @@ export default class Board {
     this.consoleLog();
   }
 
-  checkaAdjecent(source, target) {
+  checkAdjacent(source, target) {
     const diffRow = Math.abs(source.row - target.row);
     const diffCol = Math.abs(source.col - target.col);
     const isAdjecent = diffCol + diffRow === 1;
