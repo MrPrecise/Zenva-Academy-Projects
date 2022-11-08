@@ -129,7 +129,6 @@ export default class Game {
       }
     }
   }
-
   pickBlock(block) {
     if (this.isBoardBlocked) {
       return;
@@ -139,8 +138,10 @@ export default class Game {
       this.selectedBlock = block;
     } else {
       this.targetBlock = block;
+
       if (this.board.checkAdjacent(this.selectedBlock, this.targetBlock)) {
         this.isBoardBlocked = true;
+
         this.swapBlocks(this.selectedBlock, this.targetBlock);
       } else {
         this.clearSelection();
@@ -154,9 +155,7 @@ export default class Game {
     block1.y = block2.y;
     block2.x = tempX;
     block2.y = tempY;
-
     this.board.swap(block1, block2);
-
     if (!this.isReversingSwap) {
       const chains = this.board.findAllChains();
 
@@ -171,16 +170,15 @@ export default class Game {
       this.clearSelection();
     }
   }
-
   clearSelection() {
     this.isBoardBlocked = false;
     this.selectedBlock.selected = false;
     this.selectedBlock = null;
   }
-
   updateBoard() {
     this.board.clearChains();
     this.board.updateGrid();
+    this.board.consoleLog();
     const chains = this.board.findAllChains();
     if (chains.length > 0) {
       this.updateBoard();
@@ -188,9 +186,9 @@ export default class Game {
       this.clearSelection();
     }
   }
-
   getBlockFromColRow(position) {
     let foundBlock;
+
     this.blockPool.getAliveObjects().some((block) => {
       if (block.row === position.row && block.col === position.col) {
         foundBlock = block;
@@ -200,13 +198,26 @@ export default class Game {
     });
     return foundBlock;
   }
-
   dropBlock(sourceRow, targetRow, col) {
     const block = this.getBlockFromColRow({ col, row: sourceRow });
     const targetY = 183 + targetRow * (this.blockSize + 4);
     block.row = targetRow;
     block.y = targetY;
   }
-
-  dropReserveBlock(sourceRow, targetRow, col) {}
+  dropReserveBlock(sourceRow, targetRow, col) {
+    const x = 28 + col * (this.blockSize + 4);
+    const y = 183 + targetRow * (this.blockSize + 4);
+    const block = this.blockPool.get({
+      x,
+      y,
+      col,
+      row: targetRow,
+      image: this.assets[this.board.grid[targetRow][col]],
+      ttl: Infinity,
+    });
+    block.onDown = () => {
+      this.pickBlock(block);
+    };
+    track(block);
+  }
 }

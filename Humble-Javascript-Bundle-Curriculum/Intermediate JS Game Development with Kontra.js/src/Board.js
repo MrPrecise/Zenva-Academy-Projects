@@ -1,64 +1,60 @@
 export default class Board {
-  constructor(state, rows, cols, blockVar, debug = false) {
+  constructor(state, rows, cols, blockVariations, debug = false) {
     this.state = state;
     this.rows = rows;
     this.cols = cols;
-    this.blockVar = blockVar;
+    this.blockVariations = blockVariations;
     this.debug = debug;
     this.grid = [];
     this.reserveGrid = [];
-
     for (let i = 0; i < rows; i++) {
       this.grid.push([]);
       this.reserveGrid.push([]);
     }
-
     this.populateGrid();
     this.populateReserveGrid();
-    this.consoleLog();
+    // this.consoleLog();
   }
-
   populateGrid() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        const variation = Math.floor(Math.random() * this.blockVar) + 1;
-        this.grid[i].push(variation);
+        const variation = Math.floor(Math.random() * this.blockVariations) + 1;
+        this.grid[i][j] = variation;
       }
     }
+    const chains = this.findAllChains();
+    if (chains.length > 0) {
+      this.populateGrid();
+    }
   }
-
   populateReserveGrid() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        const variation = Math.floor(Math.random() * this.blockVar) + 1;
-        this.reserveGrid[i].push(variation);
+        const variation = Math.floor(Math.random() * this.blockVariations) + 1;
+        this.reserveGrid[i][j] = variation;
       }
     }
   }
-
   consoleLog() {
     if (this.debug) {
-      let aString = "";
+      let prettyString = "";
       for (let i = 0; i < this.rows; i++) {
-        aString += "\n";
+        prettyString += "\n";
         for (let j = 0; j < this.cols; j++) {
-          aString += " " + this.reserveGrid[i][j];
+          prettyString += " " + this.reserveGrid[i][j];
         }
       }
-
-      aString += "\n";
+      prettyString += "\n";
       for (let j = 0; j < this.cols; j++) {
-        aString += " -";
+        prettyString += " -";
       }
-
       for (let i = 0; i < this.rows; i++) {
-        aString += "\n";
+        prettyString += "\n";
         for (let j = 0; j < this.cols; j++) {
-          aString += " " + this.grid[i][j];
+          prettyString += " " + this.grid[i][j];
         }
       }
-
-      console.log(aString);
+      console.log(prettyString);
     }
   }
 
@@ -69,21 +65,22 @@ export default class Board {
 
     const tempPos = {
       row: source.row,
-      cols: source.col,
+      col: source.col,
     };
-
     source.row = target.row;
     source.col = target.col;
     target.row = tempPos.row;
     target.col = tempPos.col;
-    this.consoleLog();
+
+    // this.consoleLog();
   }
 
   checkAdjacent(source, target) {
     const diffRow = Math.abs(source.row - target.row);
     const diffCol = Math.abs(source.col - target.col);
-    const isAdjecent = diffCol + diffRow === 1;
-    return isAdjecent;
+    const isAdjacent =
+      (diffRow === 1 && diffCol === 0) || (diffRow === 0 && diffCol === 1);
+    return isAdjacent;
   }
 
   isChained(block) {
@@ -159,7 +156,6 @@ export default class Board {
 
     return isChained;
   }
-
   findAllChains() {
     const chained = [];
     for (let i = 0; i < this.rows; i++) {
@@ -177,49 +173,48 @@ export default class Board {
         }
       }
     }
+
     return chained;
   }
 
   clearChains() {
     const chainedBlocks = this.findAllChains();
-
     chainedBlocks.forEach((block) => {
       this.grid[block.row][block.col] = 0;
-      this.state.getBlockFromColRow(block); //.kill();
+      this.state.getBlockFromColRow(block).kill();
     });
-    this.consoleLog();
-  }
 
+    // this.consoleLog();
+  }
   dropBlock(sourceRow, targetRow, col) {
     this.grid[targetRow][col] = this.grid[sourceRow][col];
     this.grid[sourceRow][col] = 0;
     // this.consoleLog();
     this.state.dropBlock(sourceRow, targetRow, col);
   }
-
   dropReserveBlock(sourceRow, targetRow, col) {
     this.grid[targetRow][col] = this.reserveGrid[sourceRow][col];
     this.reserveGrid[sourceRow][col] = 0;
     // this.consoleLog();
     this.state.dropReserveBlock(sourceRow, targetRow, col);
   }
-
   updateGrid() {
-    for (let row = this.rows - 1; row >= 0; row--) {
-      for (let col = 0; col < this.cols; col++) {
-        if (this.grid[row][col] === 0) {
+    for (let i = this.rows - 1; i >= 0; i--) {
+      for (let j = 0; j < this.cols; j++) {
+        if (this.grid[i][j] === 0) {
           let foundBlock = false;
-          for (let rowAbove = row - 1; rowAbove >= 0; rowAbove--) {
-            if (this.grid[rowAbove][col] > 0) {
+
+          for (let k = i - 1; k >= 0; k--) {
+            if (this.grid[k][j] > 0) {
               foundBlock = true;
-              this.dropBlock(rowAbove, row, col);
+              this.dropBlock(k, i, j);
               break;
             }
           }
           if (!foundBlock) {
-            for (let rowAbove = this.rows - 1; rowAbove >= 0; rowAbove--) {
-              if (this.reserveGrid[rowAbove][col] > 0) {
-                this.dropReserveBlock(rowAbove, row, col);
+            for (let k = this.rows - 1; k >= 0; k--) {
+              if (this.reserveGrid[k][j] > 0) {
+                this.dropReserveBlock(k, i, j);
                 break;
               }
             }
@@ -227,7 +222,8 @@ export default class Board {
         }
       }
     }
+
     this.populateReserveGrid();
-    this.consoleLog();
+    // this.consoleLog();
   }
 }
