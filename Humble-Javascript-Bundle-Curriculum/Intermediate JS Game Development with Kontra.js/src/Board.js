@@ -84,4 +84,98 @@ export default class Board {
     const isAdjecent = diffCol + diffRow === 1;
     return isAdjecent;
   }
+
+  isChained(block) {
+    let isChained = false;
+    const variation = this.grid[block.row][block.col];
+    const { row, col } = block;
+
+    /**
+     * Check left chain
+     */
+    if (
+      variation === this.grid[row][col - 1] &&
+      variation === this.grid[row][col - 2]
+    ) {
+      isChained = true;
+    }
+
+    /**
+     * Check right chain
+     */
+    if (
+      variation === this.grid[row][col + 1] &&
+      variation === this.grid[row][col + 2]
+    ) {
+      isChained = true;
+    }
+
+    /**
+     * Check up chain
+     */
+    if (this.grid[row - 2]) {
+      if (
+        variation === this.grid[row - 1][col] &&
+        variation === this.grid[row - 2][col]
+      ) {
+        isChained = true;
+      }
+    }
+
+    /**
+     * Check down chain
+     */
+    if (this.grid[row + 2]) {
+      if (
+        variation === this.grid[row + 1][col] &&
+        variation === this.grid[row + 2][col]
+      ) {
+        isChained = true;
+      }
+    }
+
+    /**
+     * Check center horizonal chain
+     */
+    if (
+      variation === this.grid[row][col - 1] &&
+      variation === this.grid[row][col + 1]
+    ) {
+      isChained = true;
+    }
+
+    /**
+     * Checking center vertiacal chain
+     */
+    if (this.grid[row + 1] && this.grid[row - 1]) {
+      if (
+        variation === this.grid[row + 1][col] &&
+        variation === this.grid[row - 1][col]
+      ) {
+        isChained = true;
+      }
+    }
+
+    return isChained;
+  }
+
+  findAllChains() {
+    const chained = [];
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        if (
+          this.isChained({
+            row: i,
+            col: j,
+          })
+        ) {
+          chained.push({
+            row: i,
+            col: j,
+          });
+        }
+      }
+    }
+    return chained;
+  }
 }
