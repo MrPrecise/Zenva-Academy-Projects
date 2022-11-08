@@ -179,7 +179,7 @@ export default class Board {
     return chained;
   }
 
-  clearChaines() {
+  clearChains() {
     const chainedBlocks = this.findAllChains();
 
     chainedBlocks.forEach((block) => {
