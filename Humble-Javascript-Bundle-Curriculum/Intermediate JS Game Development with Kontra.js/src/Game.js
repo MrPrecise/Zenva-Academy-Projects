@@ -1,7 +1,8 @@
 import Grid from "./Grid.js";
 import Board from "./Board.js";
-const { init, GameLoop, Sprite, initPointer, track, load, on } = kontra;
+import Block from "./Block.js";
 
+const { init, GameLoop, Sprite, initPointer, track, load, on, Pool } = kontra;
 export default class Game {
   constructor(width, height) {
     this.width = width;
@@ -29,6 +30,9 @@ export default class Game {
   }
   render() {
     this.grid.render();
+    if (this.blockPool) {
+      this.blockPool.render();
+    }
   }
   update() {}
 
@@ -41,14 +45,14 @@ export default class Game {
 
     load(
       "assets/images/bean_blue.png",
-      "assets/images/bean_dead.png",
       "assets/images/bean_green.png",
       "assets/images/bean_orange.png",
       "assets/images/bean_pink.png",
       "assets/images/bean_purple.png",
       "assets/images/bean_red.png",
+      "assets/images/bean_yellow.png",
       "assets/images/bean_white.png",
-      "assets/images/bean_yellow.png"
+      "assets/images/bean_dead.png"
     )
       .then((assets) => {
         this.assets = assets;
@@ -63,6 +67,7 @@ export default class Game {
   start() {
     console.log("Starting Game");
     this.gameLoop.start();
+    this.drawBoard();
   }
 
   createGrid() {
@@ -77,7 +82,29 @@ export default class Game {
   }
 
   createBoard() {
-    this.board = new Board(this.numberOfRows, this.numberOfCols, 6, true);
-    window.board = this.board;
+    this.board = new Board(this.numberOfRows, this.numberOfRows, 6, true);
+    this.blockPool = Pool({
+      create: () => {
+        return new Block();
+      },
+    });
+  }
+
+  drawBoard() {
+    for (let i = 0; i < this.numberOfRows; i++) {
+      for (let j = 0; j < this.numberOfCols; j++) {
+        const x = 28 + j * (this.blockSize + 4);
+        const y = 183 + i * (this.blockSize + 4);
+        const block = this.blockPool.get({
+          x,
+          y,
+          row: i,
+          col: j,
+          image: this.assets[this.board.grid[i][j]],
+          ttl: Infinity,
+        });
+        console.log(block);
+      }
+    }
   }
 }
