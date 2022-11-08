@@ -53,5 +53,6 @@ export default class Game {
 
   createBoard() {
     this.board = new Board(this.numberOfRows, this.numberOfCols, 6, true);
+    window.board = this.board;
   }
 }

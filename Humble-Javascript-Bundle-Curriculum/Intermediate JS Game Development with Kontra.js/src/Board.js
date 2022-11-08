@@ -60,4 +60,21 @@ export default class Board {
       console.log(aString);
     }
   }
+
+  swap(source, target) {
+    const temp = this.grid[target.row][target.col];
+    this.grid[target.row][target.col] = this.grid[source.row][source.col];
+    this.grid[source.row][source.col] = temp;
+
+    const tempPos = {
+      row: source.row,
+      cols: source.col,
+    };
+
+    source.row = target.row;
+    source.col = target.col;
+    target.row = tempPos.row;
+    target.col = tempPos.col;
+    this.consoleLog();
+  }
 }
