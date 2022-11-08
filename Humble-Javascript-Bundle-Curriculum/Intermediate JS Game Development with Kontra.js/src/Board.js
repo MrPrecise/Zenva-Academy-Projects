@@ -178,4 +178,13 @@ export default class Board {
     }
     return chained;
   }
+
+  clearChaines() {
+    const chainedBlocks = this.findAllChains();
+
+    chainedBlocks.forEach((block) => {
+      this.grid[block.row][block.col] = 0;
+    });
+    this.consoleLog();
+  }
 }
