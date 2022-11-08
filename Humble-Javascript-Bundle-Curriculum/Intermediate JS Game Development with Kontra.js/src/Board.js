@@ -1,5 +1,6 @@
 export default class Board {
-  constructor(rows, cols, blockVar, debug = false) {
+  constructor(state, rows, cols, blockVar, debug = false) {
+    this.state = state;
     this.rows = rows;
     this.cols = cols;
     this.blockVar = blockVar;
@@ -184,6 +185,7 @@ export default class Board {
 
     chainedBlocks.forEach((block) => {
       this.grid[block.row][block.col] = 0;
+      this.state.getBlockFromColRow(block); //.kill();
     });
     this.consoleLog();
   }
@@ -191,13 +193,15 @@ export default class Board {
   dropBlock(sourceRow, targetRow, col) {
     this.grid[targetRow][col] = this.grid[sourceRow][col];
     this.grid[sourceRow][col] = 0;
-    this.consoleLog();
+    // this.consoleLog();
+    this.state.dropBlock(sourceRow, targetRow, col);
   }
 
   dropReserveBlock(sourceRow, targetRow, col) {
     this.grid[targetRow][col] = this.reserveGrid[sourceRow][col];
     this.reserveGrid[sourceRow][col] = 0;
-    this.consoleLog();
+    // this.consoleLog();
+    this.state.dropReserveBlock(sourceRow, targetRow, col);
   }
 
   updateGrid() {

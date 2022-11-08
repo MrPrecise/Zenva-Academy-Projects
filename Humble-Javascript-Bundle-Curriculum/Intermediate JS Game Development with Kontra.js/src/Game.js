@@ -94,7 +94,13 @@ export default class Game {
   }
 
   createBoard() {
-    this.board = new Board(this.numberOfRows, this.numberOfRows, 6, false);
+    this.board = new Board(
+      this,
+      this.numberOfRows,
+      this.numberOfRows,
+      6,
+      false
+    );
     this.blockPool = Pool({
       create: () => {
         return new Block();
@@ -141,7 +147,6 @@ export default class Game {
       }
     }
   }
-
   swapBlocks(block1, block2) {
     const tempX = block1.x;
     const tempY = block1.y;
@@ -149,9 +154,12 @@ export default class Game {
     block1.y = block2.y;
     block2.x = tempX;
     block2.y = tempY;
+
     this.board.swap(block1, block2);
+
     if (!this.isReversingSwap) {
       const chains = this.board.findAllChains();
+
       if (chains.length > 0) {
         this.updateBoard();
       } else {
@@ -180,4 +188,25 @@ export default class Game {
       this.clearSelection();
     }
   }
+
+  getBlockFromColRow(position) {
+    let foundBlock;
+    this.blockPool.getAliveObjects().some((block) => {
+      if (block.row === position.row && block.col === position.col) {
+        foundBlock = block;
+        return true;
+      }
+      return false;
+    });
+    return foundBlock;
+  }
+
+  dropBlock(sourceRow, targetRow, col) {
+    const block = this.getBlockFromColRow({ col, row: sourceRow });
+    const targetY = 183 + targetRow * (this.blockSize + 4);
+    block.row = targetRow;
+    block.y = targetY;
+  }
+
+  dropReserveBlock(sourceRow, targetRow, col) {}
 }
