@@ -14,6 +14,15 @@ const mongoConfig = {
 };
 
 /**
+ * Tells mongo to use username and password
+ */
+if (process.env.MONGO_USER_NAME && process.env.MONGO_PASSWORD) {
+  mongoConfig.auth = { authSource: "admin" };
+  mongoConfig.user = process.env.MONGO_USER_NAME;
+  mongoConfig.pass = process.env.MONGO_PASSWORD;
+}
+
+/**
  * Connect to MongoDB with config from Setup
  */
 mongoose.connect(uri, mongoConfig);
@@ -28,10 +37,13 @@ mongoose.connection.on("error", (error) => {
 });
 
 /**
- * On succesful connection
+ * On succesful connection then start listen to tapp on port
  */
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB");
+  app.listen(port, () => {
+    console.log(`This is port ${port}`);
+  });
 });
 
 /**
@@ -76,8 +88,4 @@ app.use((error, request, response, next) => {
   response
     .status(error.status || 500)
     .json({ error: error.message, status: 500 });
-});
-
-app.listen(port, () => {
-  console.log(`This is port ${port}`);
 });
