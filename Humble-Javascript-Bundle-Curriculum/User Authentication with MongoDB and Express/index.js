@@ -47,7 +47,7 @@ mongoose.connection.on("connected", () => {
 });
 
 /**
- *
+ * Added routes
  */
 const app = express();
 const port = process.env.PORT || 3000;
