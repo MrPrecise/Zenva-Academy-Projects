@@ -1,5 +1,8 @@
 const express = require("express");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
+
+const tokenList = {};
 const router = express.Router();
 
 router.get("/", (request, response) => {
@@ -37,7 +40,48 @@ router.post("/login", async (request, response, next) => {
 
       request.login(user, { session: false }, (err) => {
         if (err) return next(err);
-        return response.status(200).json({ user, status: 200 });
+
+        /**
+         * body: A body to create JWT
+         * token: Signing a JWT token
+         * refreshToken: Refreshing the expired JWT token
+         */
+        const body = {
+          _id: user._id,
+          email: user.email,
+          name: user.username,
+        };
+
+        const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {
+          expiresIn: 300,
+        });
+        const refreshToken = jwt.sign(
+          { user: body },
+          process.env.JWT_REFRESH_SECRET,
+          { expiresIn: 86400 }
+        );
+
+        /**
+         * Store tokens in cookies
+         */
+        response.cookie("jwt", token);
+        response.cookie("refreshJwt", refreshToken);
+
+        /**
+         * Store token in memory
+         */
+        tokenList[refreshToken] = {
+          token,
+          refreshToken,
+          email: user.email,
+          _id: user._id,
+          name: user.name,
+        };
+
+        /**
+         * Send token to the user
+         */
+        return response.status(200).json({ token, refreshToken, status: 200 });
       });
     } catch (err) {
       console.log(err);
@@ -59,12 +103,10 @@ router.post("/token", (request, response) => {
     response.status(400).json({ message: "Invalid", status: 400 });
   } else {
     const { refreshToken } = request.body;
-    response
-      .status(200)
-      .json({
-        message: `Refresh token requested: ${refreshToken}`,
-        status: 200,
-      });
+    response.status(200).json({
+      message: `Refresh token requested: ${refreshToken}`,
+      status: 200,
+    });
   }
 });
 
