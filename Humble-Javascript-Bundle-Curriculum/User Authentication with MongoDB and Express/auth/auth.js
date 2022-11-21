@@ -1,40 +1,54 @@
-const passport = require('passport');
-const localStrategy = require('passport-local')
+const passport = require("passport");
+const localStrategy = require("passport-local");
+const UserModel = require("../models/UserModel.js");
 
 /**
  * Handle User Registration
  */
-passport.use('signup', new localStrategy.Strategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-}, (request, email, password, done) =>{
-    console.log(email, password);
-    console.log(request.body);
-
-    const { username } = request.body;
-    if (username && username !== 'error'){
-        return done(null, {name: 'joe'})
-    } else {
-        return done(new Error('Invalid user'));
+passport.use(
+  "signup",
+  new localStrategy.Strategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    async (request, email, password, done) => {
+      try {
+        const { username } = request.body;
+        const user = await UserModel.create({ email, password, username });
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
     }
-}));
+  )
+);
 
 /**
  * Handle User Login
  */
- passport.use('login', new localStrategy.Strategy({
-    usernameField: 'email',
-    passwordField: 'password',
-  }, async (email, password, done) => {
-    if (email !== 'joe@test.com') {
-      return done(new Error('user not found'), false);
+passport.use(
+  "login",
+  new localStrategy.Strategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (email, password, done) => {
+      try {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+          return done(new Error("User not found", false));
+        }
+        const valid = await user.isValidPassword(password);
+        if (!valid) {
+          return done(new Error("Invalid password", false));
+        }
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
     }
-  
-    if (password !== 'test') {
-      return done(new Error('invalid password'), false);
-    }
-  
-    return done(null, { name: 'joe' });
-  }));
-  
+  )
+);

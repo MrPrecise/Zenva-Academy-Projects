@@ -6,16 +6,16 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
-    require: true,
+    required: true,
   },
   username: {
     type: String,
-    require: true,
+    required: true,
   },
   resetToken: {
     type: String,
@@ -35,7 +35,7 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.method.isValidPassword = async function (password) {
+UserSchema.methods.isValidPassword = async function (password) {
   const user = this;
   const compare = await bcrypt.compare(password, user.password);
   return compare;
