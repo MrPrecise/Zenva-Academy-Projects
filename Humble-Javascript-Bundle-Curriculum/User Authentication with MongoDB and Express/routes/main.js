@@ -10,10 +10,14 @@ router.get("/", (request, response) => {
   response.send("Hey");
 });
 
-router.get("/status", (request, response) => {
-  response.cookie("Testing", "Test");
-  response.status(200).json({ message: "OK", status: 200 });
-});
+router.get(
+  "/status",
+  passport.authenticate("jwt", { session: false }),
+  async (request, response) => {
+    response.cookie("Testing", "Test");
+    response.status(200).json({ message: "OK", status: 200 });
+  }
+);
 
 router.post(
   "/signup",

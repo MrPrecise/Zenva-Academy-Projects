@@ -1,6 +1,7 @@
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const UserModel = require("../models/UserModel.js");
+const jwtStrategy = require("passport-jwt");
 
 /**
  * Handle User Registration
@@ -46,6 +47,29 @@ passport.use(
           return done(new Error("Invalid password", false));
         }
         return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+/**
+ * Verify JWT
+ */
+passport.use(
+  new jwtStrategy.Strategy(
+    {
+      secretOrKey: process.env.JWT_SECRET,
+      jwtFromRequest: (request) => {
+        let token = null;
+        if (request && request.cookies) token = request.cookies.jwt;
+        return token;
+      },
+    },
+    async (token, done) => {
+      try {
+        return done(null, token.user);
       } catch (error) {
         return done(error);
       }
