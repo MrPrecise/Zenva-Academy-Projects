@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 /**
  * Setup Mongo Connection
@@ -53,6 +54,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const routes = require("./routes/main");
 const passwordRoutes = require("./routes/password");
+const secureRoutes = require("./routes/secure");
 
 /**
  * Update express settings
@@ -72,6 +74,7 @@ require("./auth/auth");
  */
 app.use("/", routes);
 app.use("/", passwordRoutes);
+app.use("/", passport.authenticate("jwt", { session: false }), secureRoutes);
 
 /**
  * Catch not found Routes
