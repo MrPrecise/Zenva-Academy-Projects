@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const { Schema } = mongoose;
 
@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unqiue: true,
   },
   password: {
     type: String,

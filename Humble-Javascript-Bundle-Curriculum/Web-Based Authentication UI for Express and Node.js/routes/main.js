@@ -26,13 +26,7 @@ router.post(
   "/signup",
   passport.authenticate("signup", { session: false }),
   async (request, response, next) => {
-    if (!request.body) {
-      response.status(400).json({ message: "Invalid", status: 400 });
-    } else {
-      response
-        .status(201)
-        .json({ message: "Signup Was Successful", status: 201 });
-    }
+    response.status(200).json({ message: "signup successful", status: 200 });
   }
 );
 
