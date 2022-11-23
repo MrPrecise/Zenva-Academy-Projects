@@ -7,6 +7,13 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 /**
+ * Routes
+ */
+const routes = require("./routes/main");
+const passwordRoutes = require("./routes/password");
+const secureRoutes = require("./routes/secure");
+
+/**
  * Setup Mongo Connection
  */
 const uri = process.env.MONGO_CONNECTION_URL;
@@ -52,9 +59,6 @@ mongoose.connection.on("connected", () => {
  */
 const app = express();
 const port = process.env.PORT || 3000;
-const routes = require("./routes/main");
-const passwordRoutes = require("./routes/password");
-const secureRoutes = require("./routes/secure");
 
 /**
  * Update express settings

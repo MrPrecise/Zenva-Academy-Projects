@@ -41,11 +41,11 @@ passport.use(
       try {
         const user = await UserModel.findOne({ email });
         if (!user) {
-          return done(new Error("User not found", false));
+          return done(new Error("user not found"), false);
         }
         const valid = await user.isValidPassword(password);
         if (!valid) {
-          return done(new Error("Invalid password", false));
+          return done(new Error("invalid password"), false);
         }
         return done(null, user);
       } catch (error) {

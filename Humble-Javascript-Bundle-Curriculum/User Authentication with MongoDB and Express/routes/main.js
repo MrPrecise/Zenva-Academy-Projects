@@ -5,20 +5,23 @@ const jwt = require("jsonwebtoken");
 const tokenList = {};
 const router = express.Router();
 
+/**
+ * First end point we tried, response is just a simple Hello World
+ */
 router.get("/", (request, response) => {
-  console.log(request);
-  response.send("Hey");
+  response.send("Hello world");
 });
 
-router.get(
-  "/status",
-  passport.authenticate("jwt", { session: false }),
-  async (request, response) => {
-    response.cookie("Testing", "Test");
-    response.status(200).json({ message: "OK", status: 200 });
-  }
-);
+/**
+ * Test to status from the system
+ */
+router.get("/status", (request, response) => {
+  response.status(200).json({ message: "ok", status: 200 });
+});
 
+/***
+ * Router to log out of the system
+ */
 router.post(
   "/signup",
   passport.authenticate("signup", { session: false }),
@@ -32,6 +35,10 @@ router.post(
     }
   }
 );
+
+/**
+ * Router to login to the system
+ */
 router.post("/login", async (request, response, next) => {
   passport.authenticate("login", async (error, user) => {
     try {
@@ -39,7 +46,7 @@ router.post("/login", async (request, response, next) => {
         return next(error);
       }
       if (!user) {
-        return next(new Error("Email and Password are required"));
+        return next(new Error("email and password are required"));
       }
 
       request.login(user, { session: false }, (err) => {
@@ -94,23 +101,40 @@ router.post("/login", async (request, response, next) => {
   })(request, response, next);
 });
 
+/**
+ * Router for logging out of the system
+ */
 router.post("/logout", (request, response) => {
-  if (!request.body) {
-    response.status(400).json({ message: "Invalid", status: 400 });
-  } else {
-    response.status(200).json({ message: "OK", status: 200 });
+  if (request.cookies) {
+    const refreshToken = request.cookies.refreshJwt;
+    if (refreshToken in tokenList) delete tokenList[refreshToken];
+    response.clearCookie("jwt");
+    response.clearCookie("refreshJwt");
   }
+  response.status(200).json({ message: "logged out", status: 200 });
 });
 
 router.post("/token", (request, response) => {
-  if (!request.body || !request.body.refreshToken) {
-    response.status(400).json({ message: "Invalid", status: 400 });
-  } else {
-    const { refreshToken } = request.body;
-    response.status(200).json({
-      message: `Refresh token requested: ${refreshToken}`,
-      status: 200,
+  const { refreshToken } = request.body;
+  if (refreshToken in tokenList) {
+    const body = {
+      email: tokenList[refreshToken].email,
+      _id: tokenList[refreshToken]._id,
+      name: tokenList[refreshToken].name,
+    };
+    const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {
+      expiresIn: 300,
     });
+
+    /**
+     * Update JWT
+     */
+    response.cookie("jwt", token);
+    tokenList[refreshToken].token = token;
+
+    response.status(200).json({ token, status: 200 });
+  } else {
+    response.status(401).json({ message: "unauthorized", status: 401 });
   }
 });
 
