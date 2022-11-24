@@ -49,10 +49,10 @@ router.post("/forgot-password", async (request, response) => {
   /**
    * Update user reset password token and exp
    */
-  await UserModel.findByIdAndUpdate(
-    { _id: user._id },
-    { resetToken: token, resetTokenExp: Date.now() + 600000 }
-  );
+  // await UserModel.findByIdAndUpdate(
+  //   { _id: user._id },
+  //   { resetToken: token, resetTokenExp: Date.now() + 600000 }
+  // );
 
   /**
    * Send user password reset email
@@ -64,11 +64,11 @@ router.post("/forgot-password", async (request, response) => {
     subject: "Zenva Phaser MMO Password Reset",
     context: {
       name: user.username,
-      url: `http://localhost:${process.env.PORT || 3000}?token=${token}`,
+      url: `http://localhost:${process.env.PORT || 3000}`,
     },
   };
   await smtpTransport.sendMail(emailOptions);
-
+  c;
   response.status(200).json({
     message:
       "An email has been sent to your email address. Password reset link is only valid for 10 minutes.",
@@ -88,7 +88,6 @@ router.post("/reset-password", async (request, response) => {
     response.status(400).json({ message: "invalid token", status: 400 });
     return;
   }
-
   /**
    * Ensure password was provided, and that the password matches the verified password
    */
