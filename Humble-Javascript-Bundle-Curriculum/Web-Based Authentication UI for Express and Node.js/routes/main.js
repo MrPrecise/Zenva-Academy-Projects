@@ -8,9 +8,9 @@ const router = express.Router();
 /**
  * First end point we tried, response is just a simple Hello World
  */
-router.get("/", (request, response) => {
-  response.send("Hello world");
-});
+// router.get("/", (request, response) => {
+//   response.send("Hello world");
+// });
 
 /**
  * Test to status from the system

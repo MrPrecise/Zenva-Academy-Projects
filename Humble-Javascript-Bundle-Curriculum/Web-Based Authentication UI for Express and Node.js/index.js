@@ -12,6 +12,7 @@ const passport = require("passport");
 const routes = require("./routes/main");
 const passwordRoutes = require("./routes/password");
 const secureRoutes = require("./routes/secure");
+const { response } = require("express");
 
 /**
  * Setup Mongo Connection
@@ -72,6 +73,14 @@ app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
  * Require Passort Auth
  */
 require("./auth/auth");
+
+/**
+ * Routes for webpage
+ */
+app.use(express.static(__dirname + "/public"));
+app.get("/", (request, response) => {
+  response.send(__dirname + "index.html");
+});
 
 /**
  * Setup routes
