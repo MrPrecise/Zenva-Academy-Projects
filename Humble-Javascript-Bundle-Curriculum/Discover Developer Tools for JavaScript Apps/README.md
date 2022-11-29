@@ -2,7 +2,7 @@
 
 ### Frameworks and Tools
 
-Phaser 3.16.2, Web Server for Chrome 0.4.8, Node.js 11.6.0, npm 6.5.0, Express 4.17.1, Postman, Nodemon 1.18.10, Body-Parser 1.19, Cookie-Parser 1.4.4, Passport.js 0.4.0, MongoDB Shell 4.0.10, Mongoose 5.5.15, Nodemailer 6.2.1, bCrypt 3.0.6, JSON Web Tokens 8.5.1, Webpack 4.36.1, Babel 7.5.0, ESLint 6.1.0, Docker 18.09.2, Docker Compose 1.23.2
+Phaser 3.16.2, Web Server for Chrome 0.4.8, Node.js 11.6.0, npm 6.5.0, Express 4.17.1, Postman, Nodemon 1.18.10, Body-Parser 1.19, Cookie-Parser 1.4.4, Passport.js 0.4.0, MongoDB Shell 4.0.10, Mongoose 5.5.15, Nodemailer 6.2.1, bCrypt 3.0.6, JSON Web Tokens 8.5.1, Webpack 4.36.1, Babel 7.5.0, ESLint 6.1.0, Docker 18.09.2, Docker Compose 1.23.2,
 
 ### Recommended Requirements
 
