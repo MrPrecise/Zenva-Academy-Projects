@@ -6,9 +6,12 @@ from kivy.uix.image import Image
 from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 from kivy.core.window import Window
+
 Window.clearcolor = (1, 1, 1, 1)
 Window.size = (400, 600)
 
+class ImageBox(Widget):
+  pass
 
 class GameScreen(Widget):
   pass

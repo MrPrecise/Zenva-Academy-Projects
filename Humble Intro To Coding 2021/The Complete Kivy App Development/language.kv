@@ -1,22 +1,83 @@
 #:kivy 2.1.0
 
 <GameScreen>:
-  canvas:
-    Color:
-      rgba: 0, 0, 0, 1
-    Rectangle:
-      pos: root.x, root.y
-      size: root.width, root.height
-    Color:
-      rgba: 1, 1, 1, 1
-  FloatLayout:
-    pos: 0, 0
-    size: root.width, root.height
-  Label:
-    pos_hint: {'x': .1, 'y': .9}
-    size_hint: .8, .1
-    text_size: self.size
-    text: "Testing"
-    font_size: 60
-    bold: True
-    color: 0, 0, 0, 1
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: root.x, root.y
+            size: root.width, root.height
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: root.x + 5, root.y + 5
+            size: root.width - 10, root.height - 10
+    FloatLayout:
+        pos: 0, 0
+        size: root.width, root.height
+
+        Label:
+            pos_hint: {'x': .1, 'y': .9}
+            size_hint: .8, .1
+            text_size: self.size
+            text: "daimante"
+            font_size: 60
+            bold: True
+            color: 0, 0, 0, 1
+
+        GridLayout:
+            pos_hint: {'x': .1, 'y': .25}
+            size_hint: None, None
+            size: root.width * .8, root.width * .8
+            cols: 2
+
+            ImageBox:
+            ImageBox:
+            ImageBox:
+            ImageBox:
+        
+
+<ImageBox>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.x, self.y
+            size: self.width, self.height
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.x + 5, self.y + 5
+            size: self.width - 10, self.height - 10
+    Button:
+        pos: root.x + 5, root.y + 5
+        size: root.width - 10, root.height - 10
+        background_normal: str(False)
+    Image:
+        source: "images/diamante.png"
+        pos: root.x + 5, root.y + 5
+        size: root.width - 10, root.height - 10
+
+<ProgressBar>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.x, self.y
+            size: self.width, self.height
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.x + 5, self.y + 5
+            size: self.width - 10, self.height - 10
+        Color:
+            rgba: 0, 0.5, 0.2, 1
+        Rectangle:
+            pos: self.x + 5, self.y + 5
+            size: self.parent.parent.bar_width, self.height - 10
+        Color:
+            rgba: 1, 1, 1, 1
+        BorderImage:
+            pos: self.width - 40, self.y + 20
+            size: self.height - 40, self.height - 40
+            source: 'images/trophy.png'
