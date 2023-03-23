@@ -1,18 +1,14 @@
 from kivy.app import App
 from kivy.uix.button import Button
+from kivy.uix.widget import Widget
 
 
-class CoolButton(Button):
+class GameScreen(Widget):
     pass
-
 
 class LanguageApp(App):
     def build(self):
-        return CoolButton(
-            pos=(100,100),
-            size_hint=(None, None),
-            size=(200,200)
-        )
+        return GameScreen()
     
 if __name__ == '__main__':
     LanguageApp().run()
