@@ -1,9 +1,22 @@
 #:kivy 2.1.0
 
 <GameScreen>:
+  canvas:
+    Color:
+      rgba: 0, 0, 0, 1
+    Rectangle:
+      pos: root.x, root.y
+      size: root.width, root.height
+    Color:
+      rgba: 1, 1, 1, 1
   FloatLayout:
     pos: 0, 0
     size: root.width, root.height
-    Button:
-      text: 'Press me'
-      on_press: root.press_button()
+  Label:
+    pos_hint: {'x': .1, 'y': .9}
+    size_hint: .8, .1
+    text_size: self.size
+    text: "Testing"
+    font_size: 60
+    bold: True
+    color: 0, 0, 0, 1
