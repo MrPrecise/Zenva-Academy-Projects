@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Responsive Web Design - Setting Grid Rows" />
+    <meta
+      name="viewport"
+      content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" />
+    <title>Responsive Web Design - Setting Grid Rows</title>
+
+    <!--CSS Grids-->
+
+    <style>
+      /*CSS rules for styling*/
+
+      /*parent class rules*/
+      #parent {
+        background: rgba(0, 0, 0, 0.5);
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+
+        /*NEW*/
+        /*set the number of rows and their heights*/
+        grid-template-rows: 100px 150px 50px;
+      }
+
+      /*child class rules*/
+      .child1 {
+        background: skyblue;
+      }
+      .child2 {
+        background: powderblue;
+      }
+      .child3 {
+        background: cadetblue;
+      }
+      .child4 {
+        background: indianred;
+      }
+      .child5 {
+        background: salmon;
+      }
+      .child6 {
+        background: firebrick;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--Parent Grid container-->
+    <div id="parent">
+      <!--Child Grid elements-->
+      <div class="child1">1</div>
+      <div class="child2">2</div>
+      <div class="child3">3</div>
+      <div class="child4">4</div>
+      <div class="child5">5</div>
+      <div class="child6">6</div>
+    </div>
+  </body>
+</html>
