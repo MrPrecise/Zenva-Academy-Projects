@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Responsive Web Design - Setting Up a Flex Container" />
+    <meta
+      name="viewport"
+      content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" />
+    <title>Responsive Web Design - Setting Up a Flex Container</title>
+
+    <!--CSS Flexbox-->
+
+    <style>
+      /*Set up the CSS rules*/
+
+      #parent {
+        background: rgba(255, 0, 0, 0.25);
+        display: flex; /*Set up the parent as a flex container*/
+        flex-direction: column; /*Choose a vertical layout*/
+      }
+
+      .child {
+        width: 100px;
+      }
+      .child1 {
+        background: rgba(255, 0, 0, 0.25);
+      }
+      .child2 {
+        background: rgba(0, 255, 0, 0.25);
+      }
+      .child3 {
+        background: rgba(0, 0, 255, 0.25);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--Set up basic HTML structures-->
+
+    <!--Parent element-->
+    <div id="parent">
+      <!--Child elements-->
+      <div class="child child1">1</div>
+      <div class="child child2">2</div>
+      <div class="child child3">3</div>
+    </div>
+  </body>
+</html>
