@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Responsive Web Design - Different Approaches to Column Widths" />
+      content="Responsive Web Design - Setting Grid Rows" />
     <meta
       name="viewport"
       content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" />
-    <title>Responsive Web Design - Different Approaches to Column Widths</title>
+    <title>Responsive Web Design - Setting Grid Rows</title>
 
     <!--CSS Grids-->
 
@@ -19,14 +19,11 @@
       #parent {
         background: rgba(0, 0, 0, 0.5);
         display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
 
         /*NEW*/
-        /*adding another 'auto' increases the number of columns*/
-        /*different units of measurement can be used*/
-        /*grid-template-columns: 250px auto 100px auto ;*/
-
-        /*set up different widths based on fractions of the available space*/
-        grid-template-columns: 1fr 2fr 1fr;
+        /*set the number of rows and their heights*/
+        grid-template-rows: 100px 150px 50px;
       }
 
       /*child class rules*/
