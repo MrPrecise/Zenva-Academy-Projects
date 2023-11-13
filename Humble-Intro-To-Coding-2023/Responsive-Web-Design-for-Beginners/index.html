@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Responsive Web Design - Adding Visual Cues to Media Query Breakpoints" />
+      content="Responsive Web Design - Building a Rapid Responsive Web Layout" />
     <meta
       name="viewport"
       content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" />
     <title>
-      Responsive Web Design - Adding Visual Cues to Media Query Breakpoints
+      Responsive Web Design - Building a Rapid Responsive Web Layout
     </title>
 
     <style>
@@ -23,11 +23,42 @@
         background: rgba(255, 0, 0, 0.25);
       }
 
+      /*Apply styling rules to individual elements*/
+
+      header {
+        background: rgba(0, 0, 0, 0.25);
+        margin-bottom: 10px;
+        height: 50px;
+      }
+
+      section {
+        background: rgba(0, 0, 0, 0.25);
+        margin-bottom: 10px;
+        height: 1000px;
+      }
+
+      aside {
+        background: rgba(0, 0, 0, 0.25);
+        margin-bottom: 10px;
+        height: 1000px;
+        display: none; /*disable the element*/
+      }
+
+      footer {
+        background: rgba(0, 0, 0, 0.25);
+        height: 25 px;
+      }
+
       /* Applies to any device whose screen width is 768px and wider */
 
       @media screen and (min-width: 768px) {
         body {
           background: rgba(0, 255, 0, 0.25);
+        }
+
+        /*Add new rule*/
+        aside {
+          display: block;
         }
       }
 
@@ -37,8 +68,30 @@
         body {
           background: rgba(0, 0, 255, 0.25);
         }
+
+        /*Change the layout for the high-resolution display*/
+        section {
+          float: left;
+          width: 70%;
+          margin-right: 10px;
+        }
+
+        aside {
+          float: right;
+          width: 30%;
+        }
+
+        footer {
+          clear: both;
+        }
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <!--Add some temporary placeholder content-->
+    <header>Header</header>
+    <section>Section</section>
+    <aside>Aside</aside>
+    <footer>Footer</footer>
+  </body>
 </html>
