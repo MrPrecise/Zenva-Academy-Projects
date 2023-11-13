@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Responsive Web Design - Establishing Grid Rows And Columns" />
+      content="Responsive Web Design - Different Approaches to Column Widths" />
     <meta
       name="viewport"
       content="user-scalable=0, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" />
-    <title>Responsive Web Design - Establishing Grid Rows And Columns</title>
+    <title>Responsive Web Design - Different Approaches to Column Widths</title>
 
     <!--CSS Grids-->
 
@@ -19,7 +19,14 @@
       #parent {
         background: rgba(0, 0, 0, 0.5);
         display: grid;
-        grid-template-columns: auto auto auto; /*control how the child Grid items are displayed*/
+
+        /*NEW*/
+        /*adding another 'auto' increases the number of columns*/
+        /*different units of measurement can be used*/
+        /*grid-template-columns: 250px auto 100px auto ;*/
+
+        /*set up different widths based on fractions of the available space*/
+        grid-template-columns: 1fr 2fr 1fr;
       }
 
       /*child class rules*/
@@ -51,7 +58,6 @@
       <div class="child1">1</div>
       <div class="child2">2</div>
       <div class="child3">3</div>
-      <!--New child Grid elements-->
       <div class="child4">4</div>
       <div class="child5">5</div>
       <div class="child6">6</div>
