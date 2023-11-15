@@ -1,29 +1,29 @@
 let question = {
-  title: "gato",
-  alternatives: ["dog", "cat", "bird", "fish"],
+  title: "Gato",
+  alternatives: ["Dog", "Cat", "Bird", "Fish"],
   correctAnswer: 1,
 };
 
 // define the array that stores all questions
 let questions = [
   {
-    title: "gato",
-    alternatives: ["dog", "cat", "bird", "fish"],
+    title: "Gato",
+    alternatives: ["Dog", "Cat", "Bird", "Fish"],
     correctAnswer: 1,
   },
   {
-    title: "ave",
-    alternatives: ["mouse", "hamster", "lizard", "bird"],
+    title: "Ave",
+    alternatives: ["Mouse", "Hamster", "Lizard", "Bird"],
     correctAnswer: 3,
   },
   {
-    title: "rata",
-    alternatives: ["cat", "fish", "rat", "shark"],
+    title: "Rata",
+    alternatives: ["Cat", "Fish", "Rat", "Shark"],
     correctAnswer: 2,
   },
   {
-    title: "mosca",
-    alternatives: ["fly", "puma", "fish", "dog"],
+    title: "Mosca",
+    alternatives: ["Fly", "Puma", "Fish", "Dog"],
     correctAnswer: 0,
   },
 ];
@@ -68,12 +68,12 @@ let app = {
 
     if (currQuestion.correctAnswer == userSelected) {
       // correct
-      console.log("correct");
+      console.log("Correct");
       this.score++;
       this.showResult(true);
     } else {
       // not correct
-      console.log("wrong");
+      console.log("Wrong");
       this.showResult(false);
     }
 
@@ -97,7 +97,7 @@ let app = {
 
   updateStats: function () {
     let scoreDiv = document.getElementById("score");
-    scoreDiv.textContent = `Your score: ${this.score}`;
+    scoreDiv.textContent = `Your Score: ${this.score}`;
   },
 
   showResult: function (isCorrect) {
@@ -118,7 +118,7 @@ let app = {
       // get correct answer (text)
       let correctAnswerText = currQuestion.alternatives[correctAnswerIndex];
 
-      result = `Wrong! Correct answer: ${correctAnswerText}`;
+      result = `Wrong! Correct Answer: ${correctAnswerText}`;
     }
 
     resultDiv.textContent = result;
