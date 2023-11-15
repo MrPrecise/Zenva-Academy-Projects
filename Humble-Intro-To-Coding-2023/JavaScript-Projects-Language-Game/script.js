@@ -10,10 +10,11 @@ let app = {
     // get alternatives
     let alts = document.querySelectorAll(".alternative");
 
-    alts.forEach(function (element, index) {
-      element.addEventListener("click", function () {
+    // second method of passing context
+    alts.forEach((element, index) => {
+      element.addEventListener("click", () => {
         // check correct answer
-        console.log("check correct answer");
+        this.checkAnswer(index);
       });
     });
 
@@ -22,6 +23,9 @@ let app = {
   },
 
   showQuestion: function (q) {
+    // keep track of current question
+    this.currQuestion = q;
+
     // show question title
     let titleDiv = document.getElementById("title");
     titleDiv.textContent = q.title;
@@ -32,6 +36,16 @@ let app = {
     alts.forEach(function (element, index) {
       element.textContent = q.alternatives[index];
     });
+  },
+
+  checkAnswer: function (userSelected) {
+    if (this.currQuestion.correctAnswer == userSelected) {
+      // correct
+      console.log("correct");
+    } else {
+      // not correct
+      console.log("wrong");
+    }
   },
 };
 
