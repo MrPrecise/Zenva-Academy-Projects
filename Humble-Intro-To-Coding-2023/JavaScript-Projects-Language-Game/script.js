@@ -30,8 +30,8 @@ let questions = [
 
 let app = {
   start: function () {
-    // keep track of current position in the questions array
     this.currPosition = 0;
+    this.score = 0; // property to keep track of score
 
     // get alternatives
     let alts = document.querySelectorAll(".alternative");
@@ -42,6 +42,9 @@ let app = {
         this.checkAnswer(index);
       });
     });
+
+    // refresh stats
+    this.updateStats();
 
     // show first question
     this.showQuestion(questions[this.currPosition]);
@@ -66,10 +69,14 @@ let app = {
     if (currQuestion.correctAnswer == userSelected) {
       // correct
       console.log("correct");
+      this.score++;
     } else {
       // not correct
       console.log("wrong");
     }
+
+    // refresh stats
+    this.updateStats();
 
     // increase position
     this.increasePosition();
@@ -79,14 +86,18 @@ let app = {
   },
 
   increasePosition: function () {
-    // increase the current position
     this.currPosition++;
 
-    // if reached the end of the database
     if (this.currPosition == questions.length) {
-      // send back to the beginning
       this.currPosition = 0;
     }
+  },
+
+  updateStats: function () {
+    // select the score element
+    let scoreDiv = document.getElementById("score");
+    // display the score using a template literal
+    scoreDiv.textContent = `Your score: ${this.score}`;
   },
 };
 
