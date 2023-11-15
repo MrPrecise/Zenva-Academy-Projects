@@ -70,9 +70,11 @@ let app = {
       // correct
       console.log("correct");
       this.score++;
+      this.showResult(true);
     } else {
       // not correct
       console.log("wrong");
+      this.showResult(false);
     }
 
     // refresh stats
@@ -94,10 +96,32 @@ let app = {
   },
 
   updateStats: function () {
-    // select the score element
     let scoreDiv = document.getElementById("score");
-    // display the score using a template literal
     scoreDiv.textContent = `Your score: ${this.score}`;
+  },
+
+  showResult: function (isCorrect) {
+    // select the DOM element
+    let resultDiv = document.getElementById("result");
+    let result = "";
+
+    // checks
+    if (isCorrect) {
+      result = "Correct Answer!";
+    } else {
+      // get the current question
+      let currQuestion = questions[this.currPosition];
+
+      // get the correct answer (index)
+      let correctAnswerIndex = currQuestion.correctAnswer;
+
+      // get correct answer (text)
+      let correctAnswerText = currQuestion.alternatives[correctAnswerIndex];
+
+      result = `Wrong! Correct answer: ${correctAnswerText}`;
+    }
+
+    resultDiv.textContent = result;
   },
 };
 
