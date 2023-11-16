@@ -9,6 +9,7 @@ async function loadCards() {
     let inEuro = document.getElementById("currency");
     const EURO_CONVERSION = 0.87;
     let priceMultiplier;
+    let currencySymbol;
 
     var cards = cardsJson.map(function (card) {
       var cardsToShow = {
@@ -23,8 +24,10 @@ async function loadCards() {
 
     if (inEuro.checked) {
       priceMultiplier = EURO_CONVERSION;
+      currencySymbol = "&euro;";
     } else {
       priceMultiplier = 1;
+      currencySymbol = "&dollar;";
     }
 
     cardTable.innerHTML =
@@ -46,6 +49,7 @@ async function loadCards() {
           "</td><td>" +
           rareCards[i].name +
           "</td><td>" +
+          currencySymbol +
           Math.round(rareCards[i].priceUSD * priceMultiplier) +
           "</td><td>" +
           rareCards[i].isRare +
@@ -59,6 +63,7 @@ async function loadCards() {
           "</td><td>" +
           cards[i].name +
           "</td><td>" +
+          currencySymbol +
           Math.round(cards[i].priceUSD * priceMultiplier) +
           "</td><td>" +
           cards[i].isRare +
