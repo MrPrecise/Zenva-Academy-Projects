@@ -20,7 +20,7 @@ Suited perfectly for beginners to Phaser, this course will prepare you to develo
 
 This course assumes familiarity with JavaScript.
 
-**You will learn this:**
+**You will learn:**
 
 - Set up a Phaser project
 - Implement and manipulate sprites
