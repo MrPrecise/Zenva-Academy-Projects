@@ -8,7 +8,7 @@ Phaser 3.3.0, npm 5.6, Node.js 8.11
 
 Basic skills in JavaScript
 
-### Course Description
+### Course Description 
 
 Explore the foundations of game development and Phaser while building a road-crossing game.
 
