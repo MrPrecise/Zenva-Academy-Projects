@@ -11,27 +11,33 @@ game_scene.preload = function () {
 // Called once after preload ends
 game_scene.create = function () {
   // Create the background sprite
-  let bg = this.add.sprite(0, 0, "background");
+  this.bg = this.add.sprite(0, 0, "background");
 
   // Change the origin of the back ground to fit the cordinates X:0 Y:0
-  bg.setOrigin(0, 0);
+  this.bg.setOrigin(0, 0);
 
   // Create the player sprite
-  let player = this.add.sprite(70, 180, "player");
+  this.player = this.add.sprite(40, 180, "player");
 
   //Messing around with scalers
-  player.setScale(1, 1.25);
+  this.player.setScale(0.5);
 
   // Create an enemy and mess with the scalers and turn the enemy upside down
-  let enemy1 = this.add.sprite(250, 180, "enemy");
+  this.enemy1 = this.add.sprite(500, 180, "enemy");
 
-  enemy1.scaleX = 1;
-  enemy1.scaleY = 1;
-  enemy1.flipX = true;
+  this.enemy1.scaleX = 1;
+  this.enemy1.scaleY = 1;
+  this.enemy1.flipX = true;
+  this.enemy1.setOrigin(0, 0);
+  this.enemy1.rotation = Math.PI / 4;
+};
 
-  // Create a second enemy with explicit width
-  let enemy2 = this.add.sprite(450, 180, "enemy");
-  enemy2.displayWidth = 100;
+game_scene.update = function () {
+  this.enemy1.angle += 1;
+  if (this.player.scaleX < 2) {
+    this.player.scaleX += 0.01;
+    this.player.scaleY += 0.01;
+  }
 };
 
 // Set configuration of the game
