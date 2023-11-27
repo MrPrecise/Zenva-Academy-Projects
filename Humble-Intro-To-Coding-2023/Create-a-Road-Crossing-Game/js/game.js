@@ -13,6 +13,7 @@ game_scene.create = function () {
   bg.setPosition(640 / 2, 360 / 2);
   let game_width = this.sys.game.config.width;
   let game_height = this.sys.game.config.height;
+  let player = this.add.sprite(70, 180, "player");
 };
 
 // Set configuration of the game
