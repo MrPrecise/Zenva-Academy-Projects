@@ -49,7 +49,8 @@ game_scene.update = function () {
   if (
     Phaser.Geom.Intersects.RectangleToRectangle(player_bounds, treasure_bounds)
   ) {
-    console.log("Happy");
+    console.log("Woooooohooooooo han flyr");
+    this.scene.restart();
   }
 };
 
