@@ -21,23 +21,6 @@ game_scene.create = function () {
 
   //Messing around with scalers
   this.player.setScale(0.5);
-
-  // Create an enemy and mess with the scalers and turn the enemy upside down
-  this.enemy1 = this.add.sprite(500, 180, "enemy");
-
-  this.enemy1.scaleX = 1;
-  this.enemy1.scaleY = 1;
-  this.enemy1.flipX = true;
-  this.enemy1.setOrigin(0, 0);
-  this.enemy1.rotation = Math.PI / 4;
-};
-
-game_scene.update = function () {
-  this.enemy1.angle += 1;
-  if (this.player.scaleX < 2) {
-    this.player.scaleX += 0.01;
-    this.player.scaleY += 0.01;
-  }
 };
 
 // Set configuration of the game
