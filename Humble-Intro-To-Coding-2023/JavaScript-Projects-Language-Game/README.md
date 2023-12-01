@@ -12,7 +12,7 @@ Basic exposure to JavaScript fundamentals such as variables, objects, conditiona
 
 Expand your JavaScript skills by building a browser-based language learning app!
 
-With no additional frameworks or libraries required, you’ll create a quiz-based game while learning how to dynamically integrate JavaScript into webpages, and mastering skills and systems that can be used to create a wide variety of apps and games.
+With no additional frameworks or libraries required, you’ll create a quiz-based game while learning how to dynamically integrate JavaScript into webpages, and mastering skills and systems that can be used to create a wide variety of apps and games
 
 **You will learn how to:**
 
