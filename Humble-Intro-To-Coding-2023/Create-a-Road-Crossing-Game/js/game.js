@@ -4,6 +4,15 @@ let game_scene = new Phaser.Scene("Game");
 // Initiate scene parameter
 game_scene.init = function () {
   this.playerSpeed = 3;
+
+  // Enemy Speed
+  this.enemyMinSpeed = 2;
+  this.enemyMaxSpeed = 4;
+
+  // Boundries
+
+  this.enemyMinY = 80;
+  this.enemyMaxY = 280;
 };
 
 // Load Assets
@@ -16,6 +25,8 @@ game_scene.preload = function () {
 
 // Called once after preload ends
 game_scene.create = function () {
+  let center_height = this.sys.game.config.height / 2;
+
   // Create the background sprite
   this.bg = this.add.sprite(0, 0, "background");
 
@@ -23,7 +34,7 @@ game_scene.create = function () {
   this.bg.setOrigin(0, 0);
 
   // Create the player sprite
-  this.player = this.add.sprite(40, this.sys.game.config.height / 2, "player");
+  this.player = this.add.sprite(40, center_height, "player");
 
   //Messing around with scalers
   this.player.setScale(0.5);
@@ -32,10 +43,21 @@ game_scene.create = function () {
 
   this.treasure = this.add.sprite(
     this.sys.game.config.width - 80,
-    this.sys.game.config.height / 2,
+    center_height,
     "treasure"
   );
   this.treasure.setScale(0.6);
+
+  this.enemy = this.add.sprite(120, center_height, "enemy");
+  this.enemy.flipX = true;
+  this.enemy.setScale(0.6);
+
+  //Set Enemy speed
+  let dir = Math.random() < 0.5 ? 1 : -1;
+  let speed =
+    this.enemyMinSpeed +
+    Math.random() * (this.enemyMaxSpeed - this.enemyMinSpeed);
+  this.enemy.speed = dir * speed;
 };
 
 game_scene.update = function () {
@@ -51,6 +73,16 @@ game_scene.update = function () {
   ) {
     console.log("Woooooohooooooo han flyr");
     this.scene.restart();
+  }
+  // Enemy Movement
+  this.enemy.y += this.enemy.speed;
+
+  // Check y Min and y Max
+  let cUp = this.enemy.speed < 0 && this.enemy.y <= this.enemyMinY;
+  let cDown = this.enemy.speed > 0 && this.enemy.y >= this.enemyMaxY;
+
+  if (cUp || cDown) {
+    this.enemy.speed *= -1;
   }
 };
 
