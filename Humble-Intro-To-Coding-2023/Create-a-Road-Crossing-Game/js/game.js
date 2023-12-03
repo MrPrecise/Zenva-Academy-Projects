@@ -13,6 +13,9 @@ game_scene.init = function () {
 
   this.enemyMinY = 80;
   this.enemyMaxY = 280;
+
+  //Status
+  this.isTerminating = false;
 };
 
 // Load Assets
@@ -52,11 +55,11 @@ game_scene.create = function () {
 
   this.enemies = this.add.group({
     key: "enemy",
-    repeat: 5,
+    repeat: 4,
     setXY: {
-      x: 90,
+      x: 100,
       y: 100,
-      stepX: 80,
+      stepX: 100,
       stepY: 20,
     },
   });
@@ -83,6 +86,9 @@ game_scene.create = function () {
 };
 
 game_scene.update = function () {
+  // Don't update if terminating
+  if (this.isTerminating) return;
+
   if (this.input.activePointer.isDown) {
     this.player.x += this.playerSpeed;
   }
@@ -124,7 +130,24 @@ game_scene.update = function () {
 };
 
 game_scene.gameOver = function () {
-  this.scene.restart();
+  this.isTerminating = true;
+
+  this.cameras.main.shake(500);
+  this.cameras.main.on(
+    "camerashakecomplete",
+    function () {
+      this.cameras.main.fade(500);
+    },
+    this
+  );
+
+  this.cameras.main.on(
+    "camerafadeoutcomplete",
+    function () {
+      this.scene.restart();
+    },
+    this
+  );
 };
 
 // Set configuration of the game
