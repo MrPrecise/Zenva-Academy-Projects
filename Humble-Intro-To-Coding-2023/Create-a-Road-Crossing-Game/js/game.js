@@ -48,16 +48,38 @@ game_scene.create = function () {
   );
   this.treasure.setScale(0.6);
 
-  this.enemy = this.add.sprite(120, center_height, "enemy");
-  this.enemy.flipX = true;
-  this.enemy.setScale(0.6);
+  // Enemies
 
-  //Set Enemy speed
-  let dir = Math.random() < 0.5 ? 1 : -1;
-  let speed =
-    this.enemyMinSpeed +
-    Math.random() * (this.enemyMaxSpeed - this.enemyMinSpeed);
-  this.enemy.speed = dir * speed;
+  this.enemies = this.add.group({
+    key: "enemy",
+    repeat: 5,
+    setXY: {
+      x: 90,
+      y: 100,
+      stepX: 80,
+      stepY: 20,
+    },
+  });
+
+  // Settomg Scale to all elements in group
+  Phaser.Actions.ScaleXY(this.enemies.getChildren(), -0.4, -0.4);
+
+  // Set flipX and speed
+  Phaser.Actions.Call(
+    this.enemies.getChildren(),
+    function (enemy) {
+      // Flip enemy
+      enemy.flipX = true;
+
+      //Set Enemy speed
+      let dir = Math.random() < 0.5 ? 1 : -1;
+      let speed =
+        this.enemyMinSpeed +
+        Math.random() * (this.enemyMaxSpeed - this.enemyMinSpeed);
+      enemy.speed = dir * speed;
+    },
+    this
+  );
 };
 
 game_scene.update = function () {
@@ -72,18 +94,37 @@ game_scene.update = function () {
     Phaser.Geom.Intersects.RectangleToRectangle(player_bounds, treasure_bounds)
   ) {
     console.log("Woooooohooooooo han flyr");
-    this.scene.restart();
+    return this.gameOver();
   }
-  // Enemy Movement
-  this.enemy.y += this.enemy.speed;
 
-  // Check y Min and y Max
-  let cUp = this.enemy.speed < 0 && this.enemy.y <= this.enemyMinY;
-  let cDown = this.enemy.speed > 0 && this.enemy.y >= this.enemyMaxY;
+  let enemies = this.enemies.getChildren();
+  let numEnemies = enemies.length;
 
-  if (cUp || cDown) {
-    this.enemy.speed *= -1;
+  for (let i = 0; i < numEnemies; i++) {
+    // Enemy Movement
+    enemies[i].y += enemies[i].speed;
+
+    // Check y Min and y Max
+    let cUp = enemies[i].speed < 0 && enemies[i].y <= this.enemyMinY;
+    let cDown = enemies[i].speed > 0 && enemies[i].y >= this.enemyMaxY;
+
+    if (cUp || cDown) {
+      enemies[i].speed *= -1;
+    }
+    // Treasure overlap check
+
+    let enemy_bounds = enemies[i].getBounds();
+    if (
+      Phaser.Geom.Intersects.RectangleToRectangle(player_bounds, enemy_bounds)
+    ) {
+      console.log("Game Over");
+      return this.gameOver();
+    }
   }
+};
+
+game_scene.gameOver = function () {
+  this.scene.restart();
 };
 
 // Set configuration of the game
