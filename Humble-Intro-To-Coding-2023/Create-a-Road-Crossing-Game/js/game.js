@@ -3,11 +3,11 @@ let game_scene = new Phaser.Scene("Game");
 
 // Initiate scene parameter
 game_scene.init = function () {
-  this.playerSpeed = 3;
+  this.playerSpeed = 12;
 
   // Enemy Speed
   this.enemyMinSpeed = 2;
-  this.enemyMaxSpeed = 4;
+  this.enemyMaxSpeed = 6;
 
   // Boundries
 
@@ -131,23 +131,23 @@ game_scene.update = function () {
 
 game_scene.gameOver = function () {
   this.isTerminating = true;
+  this.scene.restart();
+  // this.cameras.main.shake(500);
+  // this.cameras.main.on(
+  //   "camerashakecomplete",
+  //   function () {
+  //     this.cameras.main.fade(500);
+  //   },
+  //   this
+  // );
 
-  this.cameras.main.shake(500);
-  this.cameras.main.on(
-    "camerashakecomplete",
-    function () {
-      this.cameras.main.fade(500);
-    },
-    this
-  );
-
-  this.cameras.main.on(
-    "camerafadeoutcomplete",
-    function () {
-      this.scene.restart();
-    },
-    this
-  );
+  // this.cameras.main.on(
+  //   "camerafadeoutcomplete",
+  //   function () {
+  //     this.scene.restart();
+  //   },
+  //   this
+  // );
 };
 
 // Set configuration of the game
