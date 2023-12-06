@@ -7,7 +7,7 @@ game_scene.init = function () {
 
   // Enemy Speed
   this.enemyMinSpeed = 2;
-  this.enemyMaxSpeed = 6;
+  this.enemyMaxSpeed = 5;
 
   // Boundries
 
