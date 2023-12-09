@@ -1,5 +1,6 @@
-# x = "Hello "
-# print(x+"World\n")
-
-name = input("Enter name:\n")
-print(name)
+class GameObject:
+    def __init__(self, name, apperence, feel, smell):
+        self.name = name
+        self.apperence = apperence
+        self.feel = feel
+        self.smell = smell
