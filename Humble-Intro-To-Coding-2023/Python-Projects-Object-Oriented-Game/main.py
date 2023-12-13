@@ -17,11 +17,23 @@ class GameObject:
         return f"You sniff the {self.name}. {self.smell}\n"
 
 
-# Creating a game object that instantiates our GameObject class
-game_object = GameObject("Knife", "Some appearance", "Some feel", "Some smell")
+class Room:
+    # Our Room class has an escape code and a list of game objects as attributes/fields
+    escape_code = 0
+    game_objects = []
 
-# We can access an object's fields to modify them
-game_object.name = "Spoon"
+    # Initializer
+    def __init__(self, escape_code, game_objects):
+        self.escape_code = escape_code
+        self.game_objects = game_objects
 
-# And call out for its methods as seen below
-print(game_object.sniff())
+    # Returns whether the code of the room matches the code entered by the player
+    def check_code(self, code):
+        return self.escape_code == code
+
+    # Returns a list with all the names of the objects we have in our room
+    def get_game_object_names(self):
+        names = []
+        for object in self.game_objects:
+            names.append(object.name)
+        return names
