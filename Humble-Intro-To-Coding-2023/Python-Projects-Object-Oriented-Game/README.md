@@ -2,7 +2,7 @@
 
 ### Frameworks and Tools
 
-Python 3.8
+Python 3.8 - 3.11
 
 ### Recommended Requirements
 
