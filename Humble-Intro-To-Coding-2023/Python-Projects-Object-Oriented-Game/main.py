@@ -1,18 +1,21 @@
 class GameObject:
-    def __init__(self, name, apperence, feel, smell):
+
+    # Sets up an instance of GameObject with name, appearance, feel, and smell
+    def __init__(self, name, appearance, feel, smell):
         self.name = name
-        self.apperence = apperence
+        self.appearance = appearance
         self.feel = feel
         self.smell = smell
 
-    # Implementing the methods of our class
+    # Returns string describing object appearance
     def look(self):
-        # We're formatting the string so it shows the name and appearance of the object
         return f"You look at the {self.name}. {self.appearance}\n"
 
+    # Returns string describing object feel
     def touch(self):
         return f"You touch the {self.name}. {self.feel}\n"
 
+    # Returns string describing object smell
     def sniff(self):
         return f"You sniff the {self.name}. {self.smell}\n"
 
@@ -27,7 +30,7 @@ class Room:
         self.escape_code = escape_code
         self.game_objects = game_objects
 
-    # Returns whether the code of the room matches the code entered by the player
+    # Returns whether the escape code of the room matches the code entered by the player
     def check_code(self, code):
         return self.escape_code == code
 
@@ -77,15 +80,17 @@ class Game:
                 "The battery compartment is open and empty.",
                 "It smells of plastic."),
         ]
-# For each turn, we want to present the prompt to the player
 
+    # For each turn, we want to present the prompt to the player
     def take_turn(self):
         prompt = self.get_room_prompt()
         selection = int(input(prompt))
-        self.select_object(selection - 1)
+        # Only takes the selection prompted if it's a valid input
+        if selection >= 1 and selection <= 5:
+            self.select_object(selection - 1)
+            self.take_turn()
 
     # Shows the option to enter the code or interact further with the objects in the room
-
     def get_room_prompt(self):
         prompt = "Enter the 3-digit lock code or choose an item to interact with:\n"
         names = self.room.get_game_object_names()
@@ -95,16 +100,26 @@ class Game:
             index += 1
         return prompt
 
+    # Selects the object chosen by the player and prompts them for further interaction
     def select_object(self, index):
         selected_object = self.room.game_objects[index]
-        promt = self.get_object_interaction_string(selected_object.name)
-        interaction = input(promt)
-        print(interaction)
-        return
+        prompt = self.get_object_interaction_string(selected_object.name)
+        interaction = input(prompt)
+        clue = self.interact_with_object(selected_object, interaction)
+        print(clue)
 
+    # Displays message to get type of interaction with object
     def get_object_interaction_string(self, name):
+        return f"How do you want to interact with the {name}?\n1. Look\n2. Touch\n3. Smell\n"
 
-        return f"How do you want to interact with the {name}?\n1: Look\n2: Touch\n3: Smell\n"
+    # Shows the interaction message to the player
+    def interact_with_object(self, object, interaction):
+        if interaction == "1":
+            return object.look()
+        elif interaction == "2":
+            return object.touch()
+        else:
+            return object.sniff()
 
 
 # Here we're creating an object of our Game class
