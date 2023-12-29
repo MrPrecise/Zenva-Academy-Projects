@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Patient:
     def __init__(self,
                  first_name,
@@ -13,3 +16,17 @@ class Patient:
         self.height = height
         self.weight = weight
         self.is_taking_medication = is_taking_medication
+
+    def convert_value_to_strings(self):
+        date_of_birth = datetime.strftime(
+            self.date_of_birth, '%d/%m/%Y')  # DD/MM/YYYY
+        height = str(self.height)
+        weight = str(self.weight)
+        is_taking_medication = str(self.is_taking_medication)
+
+        return [self.first_name,
+                self.last_name,
+                date_of_birth,
+                height,
+                weight,
+                is_taking_medication]
