@@ -19,11 +19,13 @@ def convert_patients_to_table_data():
 
 # Creating the layout
 layout = [
-    [sg.Text('Here is some text to display')]
+    [sg.Text('X'), sg.Text('O'), sg.Text('X')],
+    [sg.Text('O'), sg.Text('X'), sg.Text('O')],
+    [sg.Text('O'), sg.Text('O'), sg.Text('X')]
 ]
 
 # Creating the window
-window = sg.Window('Title here', layout)
+window = sg.Window('Tic Tac Toe', layout)
 
 # Responding to user events
 while True:
