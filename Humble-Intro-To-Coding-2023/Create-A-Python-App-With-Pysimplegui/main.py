@@ -17,4 +17,5 @@ def convert_patients_to_table_data():
     return patients_data
 
 
+# Print
 print(convert_patients_to_table_data())
