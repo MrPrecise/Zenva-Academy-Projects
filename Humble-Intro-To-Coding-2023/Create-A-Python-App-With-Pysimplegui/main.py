@@ -17,5 +17,19 @@ def convert_patients_to_table_data():
     return patients_data
 
 
-# Print
-print(convert_patients_to_table_data())
+# Creating the layout
+layout = [
+    [sg.Text('Here is some text to display')]
+]
+
+# Creating the window
+window = sg.Window('Title here', layout)
+
+# Responding to user events
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+
+# Closing the window
+window.close()
