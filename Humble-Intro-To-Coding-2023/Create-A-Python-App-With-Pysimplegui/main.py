@@ -1,37 +1,25 @@
-from patient import Patient
-from datetime import datetime
 import PySimpleGUI as sg
+import data_function
 
-patients = [
-    Patient("1 User", "Test", datetime(1990, 5, 6), 180, 85.3, True),
-    Patient("2 User", "Test", datetime(1991, 4, 3), 169, 75, True),
-    Patient("3 User", "Test", datetime(1992, 1, 2), 175, 80.3, True)]
-
-
-# Returns a list with all patients' info
-def convert_patients_to_table_data():
-    patients_data = []
-    for patient in patients:
-        strings = patient.convert_value_to_strings()
-        patients_data.append(strings)
-    return patients_data
-
-
-# Creating the layout
-layout = [
-    [sg.Text('X'), sg.Text('O'), sg.Text('X')],
-    [sg.Text('O'), sg.Text('X'), sg.Text('O')],
-    [sg.Text('O'), sg.Text('O'), sg.Text('X')]
+# Patients table column titles
+table_headings = [
+    "First name", "Last name", "Date of birth", "Height", "Weight", "Is taking medication?"
 ]
 
-# Creating the window
-window = sg.Window('Tic Tac Toe', layout)
+# Patients table rows data
+table_data = data_function.convert_patients_to_table_data()
 
-# Responding to user events
+# Patients table layout
+patients_window_layout = [
+    [sg.Table(headings=table_headings, values=table_data)]
+]
+
+# Displays our table
+patients_window = sg.Window('Patients List', patients_window_layout)
+
 while True:
-    event, values = window.read()
+    event, values = patients_window.read()
     if event == sg.WIN_CLOSED:
         break
-
-# Closing the window
-window.close()
+# Closes the window
+patients_window.close()
