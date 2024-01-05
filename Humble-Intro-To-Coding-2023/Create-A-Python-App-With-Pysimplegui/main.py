@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import data_function
+import patient_intake_form
 
 # Patients table column titles
 table_headings = [
@@ -12,7 +13,7 @@ table_data = data_function.convert_patients_to_table_data()
 
 
 def press_add_patient_button():
-    print("Button pressed")
+    patient_intake_form.display_intake_form()
 
 
 # Patients table layout
