@@ -12,14 +12,16 @@ table_data = data_function.convert_patients_to_table_data()
 # Handler function for the 'Add new patient' button
 
 
-def press_add_patient_button():
+def press_add_patient_button(patients_window):
     patient_intake_form.display_intake_form()
+    data = data_function.convert_patients_to_table_data()
+    patients_window["PATIENTS_TABLE"].update(values=data)
 
 
 # Patients table layout
 patients_window_layout = [
     [sg.Text("All Patient Data"), sg.Button("Add new patient")],
-    [sg.Table(headings=table_headings, values=table_data)]
+    [sg.Table(headings=table_headings, values=table_data, key="PATIENTS_TABLE")]
 ]
 
 # Displays our table
@@ -31,6 +33,6 @@ while True:
     if event == sg.WIN_CLOSED:
         break
     elif event == "Add new patient":
-        press_add_patient_button()
+        press_add_patient_button(patients_window)
 # Closes the window
 patients_window.close()

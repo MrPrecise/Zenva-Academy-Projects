@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
+import data_function
 
-# Reads the 6 inputs from our form window
+# Reads the 6 inputs from our form window and tries to create a patient with them
 
 
 def read_input_values(values):
@@ -10,12 +11,8 @@ def read_input_values(values):
     height = values["HEIGHT"]
     weight = values["WEIGHT"]
     is_taking_medication = values["IS_TAKING_MEDICATION"]
-    print(first_name)
-    print(last_name)
-    print(date_of_birth)
-    print(height)
-    print(weight)
-    print(is_taking_medication)
+    data_function.try_to_create_patient(
+        first_name, last_name, date_of_birth, height, weight, is_taking_medication)
 
 # Creates the layout
 
@@ -25,7 +22,7 @@ def create_layout():
         [sg.Text("First name"), sg.Input(key="FIRST_NAME")],
         [sg.Text("Last name"), sg.Input(key="LAST_NAME")],
         [sg.Text("Date of birth"), sg.Input(key="DATE_OF_BIRTH"),
-         sg.CalendarButton("Select date")],
+         sg.CalendarButton("Select date", format='%Y/%m/%d')],
         [sg.Text("Height"), sg.Input(key="HEIGHT")],
         [sg.Text("Weight"), sg.Input(key="WEIGHT")],
         [sg.Text("Is taking medication?"), sg.Checkbox(
