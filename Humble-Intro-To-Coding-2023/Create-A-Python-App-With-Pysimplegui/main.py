@@ -13,9 +13,10 @@ table_data = data_function.convert_patients_to_table_data()
 
 
 def press_add_patient_button(patients_window):
-    patient_intake_form.display_intake_form()
-    data = data_function.convert_patients_to_table_data()
-    patients_window["PATIENTS_TABLE"].update(values=data)
+    was_save_successful = patient_intake_form.display_intake_form()
+    if was_save_successful:
+        table_data = data_function.convert_patients_to_table_data()
+        patients_window["PATIENTS_TABLE"].update(values=table_data)
 
 
 # Patients table layout
