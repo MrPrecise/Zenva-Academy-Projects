@@ -133,6 +133,6 @@ dist
 # Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
-.cpython-310.pyc
 *.py[cod]
-*.pyc
+*$py.class
+Humble-Intro-To-Coding-2023/Create-A-Python-App-With-Pysimplegui/__pycache__/patient.cpython-310.pyc
