@@ -133,5 +133,6 @@ dist
 # Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.cpython-310.pyc
 *.py[cod]
-.pyc
+*.pyc
