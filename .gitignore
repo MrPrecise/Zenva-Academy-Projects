@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -128,3 +129,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Python
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+__pycache__/patient.cpython-310.pyc
+*.pyc
