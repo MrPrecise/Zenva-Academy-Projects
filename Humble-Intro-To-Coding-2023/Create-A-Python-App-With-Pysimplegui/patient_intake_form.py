@@ -17,3 +17,9 @@ patient_intake_layout = [
 def display_intake_form():
     patient_intake_window = sg.Window(
         "New Patient Form", patient_intake_layout)
+
+    while True:
+        event, values = patient_intake_window.read()
+        if event == sg.WIN_CLOSED or event == "Cancel":
+            break
+    patient_intake_window.close()
