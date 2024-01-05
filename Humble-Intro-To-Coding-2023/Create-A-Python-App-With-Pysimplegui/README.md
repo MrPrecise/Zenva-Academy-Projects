@@ -2,7 +2,7 @@
 
 ### Frameworks and Tools
 
-Python 3.8, Repl.it
+Python 3.10, Repl.it
 
 ### Recommended Requirements
 
