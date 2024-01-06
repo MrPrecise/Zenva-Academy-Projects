@@ -1,10 +1,11 @@
 import openai
 from openai import OpenAI
 import wikipedia
+import os
 
 # Create OpenAI Client with API Key
 client = OpenAI(
-    api_key=""
+    api_key=os.environ.get('OPENAI_API_KEY')
 )
 
 title = input('Title of page: ')
@@ -24,6 +25,8 @@ try:
     response = client.chat.completions.create(
         messages=messages,
         model="gpt-3.5-turbo"
+        # n = 2 | Get more responses
+        # max_tokens | Shorter responses but cheaper api calls
     )
 
     # Print Actual Message
