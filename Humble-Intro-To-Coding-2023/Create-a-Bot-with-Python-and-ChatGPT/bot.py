@@ -5,16 +5,15 @@ client = OpenAI(
     api_key=""
 )
 
-# Added messages
-message = {'role': 'user',
-           'content': 'What is the square root of four houndred?'
-           }
 
-# Added array that can be filled with messages later on
-messages = []
-
-# Append prior message
-messages.append(message)
+# Array with messages
+messages = [
+    {'role': 'system',
+     'content': 'You are a CTO mentoring developers, dont only provide answers also ask guiding questions'
+     },
+    {'role': 'user',
+     'content': 'Why is my website down?'
+     }]
 
 # Used ChatGPT 3.5 that was used in the course
 # However there are many options we can find under here:
@@ -23,8 +22,5 @@ response = client.chat.completions.create(
     messages=messages, model="gpt-3.5-turbo"
 )
 
-# Print Full Response
-print(response)
-
 # Print Actual Message
-print(response.choices[0].message.content)
+print(response.choices[0].message.content + "\n")
