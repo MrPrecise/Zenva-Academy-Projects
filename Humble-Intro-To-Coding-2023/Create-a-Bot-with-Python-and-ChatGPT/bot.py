@@ -1,19 +1,20 @@
 import openai
 from openai import OpenAI
+import wikipedia
 
 # Create OpenAI Client with API Key
 client = OpenAI(
     api_key=""
 )
 
+title = input('Title of page: ')
+page = wikipedia.page(title=title, auto_suggest=False)
+
 
 # Array with messages
 messages = [
-    {'role': 'system',
-     'content': 'You are a CTO mentoring developers, dont only provide answers also ask guiding questions'
-     },
     {'role': 'user',
-     'content': 'Why is my website down?'
+     'content': f"Create summery of this article: {page.content[:5000]}"
      }]
 
 try:
@@ -22,17 +23,15 @@ try:
     # https://platform.openai.com/account/limits
     response = client.chat.completions.create(
         messages=messages,
-        model="gpt-3.5-turbo",
-        n=2,
-        max_tokens=20
+        model="gpt-3.5-turbo"
     )
 
     # Print Actual Message
     print(response.choices[0].message.content + "\n")
-    print(response.choices[1].message.content + "\n")
 
 except openai.AuthenticationError:
     print('No Valid Token / Authentication Rrror')
 
-except openai.BadRequestError:
-    print('Invalid request, read the manual: https://platform.openai.com/docs/api-reference')
+except openai.BadRequestError as e:
+    print('Invalid request, read the manual: https://platform.openai.com/docs/api-reference' + "\n\n")
+    print(e)
