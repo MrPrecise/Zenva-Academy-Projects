@@ -21,7 +21,7 @@ while True:
     messages.append(response.choices[0].message)
 
     # adding prompt again to continue with the quiz
-    messages.append(prompt)
+    messages.append(messages[0])
     # capture user input
     user_input = input('Enter your answer: ')
     # quit loop if user presses "q"
