@@ -19,8 +19,12 @@ messages = [
 # However there are many options we can find under here:
 # https://platform.openai.com/account/limits
 response = client.chat.completions.create(
-    messages=messages, model="gpt-3.5-turbo"
+    messages=messages,
+    model="gpt-3.5-turbo",
+    n=2,
+    max_tokens=20
 )
 
 # Print Actual Message
 print(response.choices[0].message.content + "\n")
+print(response.choices[1].message.content + "\n")
