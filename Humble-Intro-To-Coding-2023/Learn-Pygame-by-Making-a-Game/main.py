@@ -5,6 +5,10 @@ import pygame
 pygame.init()
 
 
+# Initilzise Clock
+game_clock = pygame.time.Clock()
+
+
 def exitgame():
     # Closing Pygame and our application
     pygame.quit()
@@ -27,6 +31,7 @@ while True:
     game_window.fill(white_colour)
 
     pygame.display.update()
+    game_clock(60)
 
     pygame.time.delay(5000)
     if (True):
