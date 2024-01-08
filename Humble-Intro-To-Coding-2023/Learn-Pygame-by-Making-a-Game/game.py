@@ -26,11 +26,17 @@ class Game:
 
         # Create game object Player
         self.player = Player(
-            280, 530, 40, 40, "assets/player.png", 10)
+            280, 530, 40, 40, "assets/player.png", 5)
 
         # Created game object Enemy
-        self.enemy = Enemy(
-            0, 450, 40, 40, "assets/enemy.png", 5)
+        self.enemies = [
+            Enemy(0, 450, 40, 40, 'assets/enemy.png', 3),
+            Enemy(300, 300, 40, 40, 'assets/enemy.png', 4),
+            Enemy(450, 150, 40, 40, 'assets/enemy.png', 5),
+        ]
+
+        self.level = 1.0
+        self.reset_map()
 
     def draw_objects(self):
         # Creating game windod with width / height variable
@@ -49,8 +55,9 @@ class Game:
             self.player.image, (self.player.x, self.player.y))
 
         # Draw Enemy
-        self.game_window.blit(
-            self.enemy.image, (self.enemy.x, self.enemy.y))
+        for enemy in self.enemies:
+            self.game_window.blit(
+                enemy.image, (enemy.x, enemy.y))
 
         pygame.display.update()
 
@@ -69,11 +76,14 @@ class Game:
                     player_direction = self.stop_player(event)
 
             # Tell both Player and Enemy to move
-            self.player.move(player_direction, self.height)
-            self.enemy.move(self.width)
+            self.move_objects(player_direction)
 
             self.draw_objects()
-            self.game_clock.tick(60)
+
+            if self.check_if_collided():
+                return
+
+            self.game_clock.tick(120)
 
     def exit_game(self):
         # Closing Pygame and our application
@@ -85,7 +95,33 @@ class Game:
             return -1
         elif e.key == pygame.K_DOWN:
             return 1
+        else:
+            return 0
 
     def stop_player(self, e):
         if e.key == pygame.K_UP or pygame.K_DOWN:
             return 0
+
+    def detect_collision(self, object_1, object_2):
+        if object_1.y > (object_2.y + object_2.height):
+            return False
+        elif (object_1.y + object_1.height) < object_2.y:
+            return False
+        if object_1.x > (object_2.x + object_2.width):
+            return False
+        elif (object_1.x + object_1.width) < object_2.x:
+            return False
+        return True
+
+    def move_objects(self, player_direction):
+        self.player.move(player_direction, self.height)
+        for enemy in self.enemies:
+            enemy.move(self.width)
+
+    def check_if_collided(self):
+        for enemy in self.enemies:
+            if self.detect_collision(self.player, enemy):
+                return True
+        if self.detect_collision(self.player, self.treasure):
+            return True
+        return False
