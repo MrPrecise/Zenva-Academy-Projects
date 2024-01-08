@@ -12,4 +12,5 @@ class Enemy(GameObject):
             self.speed = abs(self.speed)
         elif self.x >= max_width - self.width:
             self.speed = -self.speed
+
         self.x += self.speed

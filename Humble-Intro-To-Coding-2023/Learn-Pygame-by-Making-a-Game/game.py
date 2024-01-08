@@ -1,6 +1,7 @@
 import pygame
 from game_object import GameObject
 from player import Player
+from enemy import Enemy
 
 
 class Game:
@@ -27,6 +28,10 @@ class Game:
         self.player = Player(
             280, 530, 40, 40, "assets/player.png", 10)
 
+        # Created game object Enemy
+        self.enemy = Enemy(
+            0, 450, 40, 40, "assets/enemy.png", 5)
+
     def draw_objects(self):
         # Creating game windod with width / height variable
         self.game_window.fill(self.white_colour)
@@ -42,6 +47,10 @@ class Game:
         # Draw Player
         self.game_window.blit(
             self.player.image, (self.player.x, self.player.y))
+
+        # Draw Enemy
+        self.game_window.blit(
+            self.enemy.image, (self.enemy.x, self.enemy.y))
 
         pygame.display.update()
 
@@ -59,7 +68,10 @@ class Game:
                 elif event.type == pygame.KEYUP:
                     player_direction = self.stop_player(event)
 
+            # Tell both Player and Enemy to move
             self.player.move(player_direction, self.height)
+            self.enemy.move(self.width)
+
             self.draw_objects()
             self.game_clock.tick(60)
 
