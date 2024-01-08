@@ -24,19 +24,32 @@ class Game:
         self.treasure = GameObject(
             280, 35, 40, 40, "assets/treasure.png")
 
-        # Create game object Player
-        self.player = Player(
-            280, 530, 40, 40, "assets/player.png", 5)
-
-        # Created game object Enemy
-        self.enemies = [
-            Enemy(0, 450, 40, 40, 'assets/enemy.png', 3),
-            Enemy(300, 300, 40, 40, 'assets/enemy.png', 4),
-            Enemy(450, 150, 40, 40, 'assets/enemy.png', 5),
-        ]
-
         self.level = 1.0
         self.reset_map()
+
+    def reset_map(self):
+      # NOTE: We're using different values and image paths here specifically for the Trinket application
+        self.player = Player(280, 530, 40, 40, "assets/player.png", 3)
+
+        # Increases the speed of enemies as the level goes up
+        speed = 1 + (self.level * 0.5)
+
+        # Increases the number of enemies as the game level goes up
+        if self.level >= 4.0:
+            self.enemies = [
+                Enemy(0, 450, 40, 40, "assets/enemy.png", speed),
+                Enemy(250, 300, 40, 40, "assets/enemy.png", speed),
+                Enemy(0, 150, 40, 40, "assets/enemy.png", speed),
+            ]
+        elif self.level >= 2.0:
+            self.enemies = [
+                Enemy(0, 450, 40, 40, "assets/enemy.png", speed),
+                Enemy(250, 300, 40, 40, "assets/enemy.png", speed),
+            ]
+        else:
+            self.enemies = [
+                Enemy(0, 450, 40, 40, "assets/enemy.png", speed),
+            ]
 
     def draw_objects(self):
         # Creating game windod with width / height variable
@@ -81,7 +94,7 @@ class Game:
             self.draw_objects()
 
             if self.check_if_collided():
-                return
+                self.reset_map()
 
             self.game_clock.tick(120)
 
@@ -121,7 +134,9 @@ class Game:
     def check_if_collided(self):
         for enemy in self.enemies:
             if self.detect_collision(self.player, enemy):
+                self.level = 1.0
                 return True
         if self.detect_collision(self.player, self.treasure):
+            self.level += 0.5
             return True
         return False
