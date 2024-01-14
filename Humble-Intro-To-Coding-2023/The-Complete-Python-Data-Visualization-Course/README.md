@@ -28,3 +28,5 @@ This course assumes basic to intermediate familiarity with Python.
 - Scatter plots
 - Joint plots
 - Interactive elements
+
+---
