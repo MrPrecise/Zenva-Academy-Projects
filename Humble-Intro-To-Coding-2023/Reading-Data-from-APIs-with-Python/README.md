@@ -6,7 +6,7 @@ Python 3.6, Anaconda 5.2, Jupyter Notebook 5.5, Beautiful Soup 4.6
 
 ### Recommended Requirements
 
-Basic knowledge of Python and Jupyter Notebook. You must also have BeautifulSoup installed.
+Basic knowledge of Python and Jupyter Notebook. You must also have BeautifulSoup installed
 
 ### Course Description
 
@@ -18,7 +18,7 @@ This course will walk you through how to use Python to retrieve and parse data t
 
 No matter your goals, understanding this aspect of data retrieval will give you a better grasp of how data is often transferred and let you navigate the world more informed.
 
-This course assumes familiarity with Python and Jupyter Notebook. You will also need BeautifulSoup installed.
+This course assumes familiarity with Python and Jupyter Notebook. You will also need BeautifulSoup installed
 
 **You will learn how to:**
 
