@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter as tk
 
 
 class MyApp:
@@ -6,7 +7,7 @@ class MyApp:
 
         # Root configuration
         root.title("Cool Stuff")
-        root.geometry("250x250")
+        root.geometry("400x350")
         root.maxsize(1000, 800)
 
         # Label variable and configuration for the page
@@ -46,10 +47,10 @@ class MyApp:
                      lambda s: self.select_item(listbox.curselection()))
 
         # Everything packed in order
-        label.pack()
-        entry.pack()
-        listbox.pack()
-        button.pack()
+        label.pack(side=tk.TOP, padx=40, pady=20)
+        entry.pack(side=tk.TOP, padx=40, pady=20)
+        listbox.pack(side=tk.TOP, padx=40, pady=20)
+        button.pack(side=tk.TOP, padx=40, pady=20)
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
