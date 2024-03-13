@@ -47,11 +47,10 @@ class MyApp:
                      lambda s: self.select_item(listbox.curselection()))
 
         # Everything packed in order
-        label.pack(side=tk.TOP, padx=40, pady=20)
-        # entry.pack(side=tk.TOP, padx=40, pady=20)
-        entry.place(x=100, y=50)
-        # listbox.pack(side=tk.TOP, padx=40, pady=20)
-        # button.pack(side=tk.TOP, padx=40, pady=20)
+        label.grid(column=1, row=1)
+        entry.grid(column=2, row=1)
+        listbox.grid(column=1, row=2)
+        button.grid(column=2, row=2, sticky=(S, E))
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
