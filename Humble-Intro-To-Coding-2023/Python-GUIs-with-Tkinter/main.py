@@ -48,9 +48,10 @@ class MyApp:
 
         # Everything packed in order
         label.pack(side=tk.TOP, padx=40, pady=20)
-        entry.pack(side=tk.TOP, padx=40, pady=20)
-        listbox.pack(side=tk.TOP, padx=40, pady=20)
-        button.pack(side=tk.TOP, padx=40, pady=20)
+        # entry.pack(side=tk.TOP, padx=40, pady=20)
+        entry.place(x=100, y=50)
+        # listbox.pack(side=tk.TOP, padx=40, pady=20)
+        # button.pack(side=tk.TOP, padx=40, pady=20)
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
