@@ -47,10 +47,8 @@ class MyApp:
                      lambda s: self.select_item(listbox.curselection()))
 
         # Everything packed in order
-        label.grid(column=1, row=1)
-        entry.grid(column=2, row=1)
-        listbox.grid(column=1, row=2)
-        button.grid(column=2, row=2, sticky=(S, E))
+        button.place(x=0, y=0)
+        button.config(width=10, height=2, font=("Courier", 40))
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
