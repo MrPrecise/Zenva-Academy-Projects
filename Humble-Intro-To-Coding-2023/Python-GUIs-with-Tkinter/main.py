@@ -7,17 +7,19 @@ class MyApp:
 
         # Root configuration
         root.title("Cool Stuff")
-        root.geometry("400x350")
-        root.maxsize(1000, 800)
-
-        frame = Frame(root, width=200, height=100,
-                      borderwidth=10, relief="sunken")
-        frame.place(x=0, y=0)
+        frame = Frame(
+            root,
+            borderwidth=10,
+            relief="sunken"
+        )
+        frame.grid(column=1, row=1, sticky=(N, E, S, W))
+        root.columnconfigure(1, weight=1)
+        root.rowconfigure(1, weight=1)
 
         # Label variable and configuration for the page
         self.label_text = StringVar()
         self.label_text.set("Enter Full Name")
-        label = Label(root)
+        label = Label(frame)
 
         label.configure(
             font=("Courier", 20),
@@ -27,13 +29,13 @@ class MyApp:
         # Input box and variable for the page
         self.entry_text = StringVar()
         entry = Entry(
-            root,
+            frame,
             textvariable=self.entry_text
         )
 
         # Button on the page
         button = Button(
-            root,
+            frame,
             text="Confirm",
             command=self.button_pressed
         )
@@ -42,7 +44,7 @@ class MyApp:
         self.list_item_strings = ["Hey", "Hi", "Hello", "Greetings"]
         list_items = StringVar(value=self.list_item_strings)
         listbox = Listbox(
-            root,
+            frame,
             listvariable=list_items,
             height=5
         )
