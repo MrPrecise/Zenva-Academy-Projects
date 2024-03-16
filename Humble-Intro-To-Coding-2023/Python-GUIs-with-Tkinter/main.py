@@ -2,6 +2,12 @@ from tkinter import *
 import tkinter as tk
 
 
+class ToDoItem:
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
+
+
 class MyApp:
     def __init__(self, root):
 
@@ -16,15 +22,21 @@ class MyApp:
         root.columnconfigure(1, weight=1)
         root.rowconfigure(1, weight=1)
 
-        # Label variable and configuration for the page
-        self.label_text = StringVar()
-        self.label_text.set("Enter Full Name")
-        label = Label(frame)
+        self.items = [
+            ToDoItem("A", "1"),
+            ToDoItem("B", "2"),
+            ToDoItem("C", "3")
+        ]
+        self.to_do_names = StringVar(value=list(
+            map(lambda x: x.name, self.items)))
+        item_list = Listbox(frame, listvariable=self.to_do_names)
+        item_list.bind("<<ListboxSelect>>",
+                       lambda s: self.select_item(item_list.curselection()))
+        item_list.grid(column=1, row=2, sticky=(E, W), rowspan=5)
 
-        label.configure(
-            font=("Courier", 20),
-            textvariable=self.label_text
-        )
+        # Label variable and configuration for the page
+
+        label = Label(frame)
 
         # Input box and variable for the page
         self.entry_text = StringVar()
@@ -41,25 +53,17 @@ class MyApp:
         )
 
         # List of Greetings
-        self.list_item_strings = ["Hey", "Hi", "Hello", "Greetings"]
-        list_items = StringVar(value=self.list_item_strings)
         listbox = Listbox(
             frame,
-            listvariable=list_items,
-            height=5
+            listvariable=self.to_do_names
         )
-
-        listbox.bind("<<ListboxSelect>>",
-                     lambda s: self.select_item(listbox.curselection()))
-
-        # Everything packed in order
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
 
     def select_item(self, index):
-        selected_item = self.list_item_strings[index[0]]
-        print(selected_item)
+        selected_item = self.to_do_names[index[0]]
+        print("selected_item")
 
 
 root = Tk()
