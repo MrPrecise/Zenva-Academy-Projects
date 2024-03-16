@@ -10,6 +10,10 @@ class MyApp:
         root.geometry("400x350")
         root.maxsize(1000, 800)
 
+        frame = Frame(root, width=200, height=100,
+                      borderwidth=10, relief="sunken")
+        frame.place(x=0, y=0)
+
         # Label variable and configuration for the page
         self.label_text = StringVar()
         self.label_text.set("Enter Full Name")
@@ -47,8 +51,6 @@ class MyApp:
                      lambda s: self.select_item(listbox.curselection()))
 
         # Everything packed in order
-        button.place(x=0, y=0)
-        button.config(width=10, height=2, font=("Courier", 40))
 
     def button_pressed(self):
         self.label_text.set(self.entry_text.get())
